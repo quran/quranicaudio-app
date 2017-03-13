@@ -1,0 +1,7 @@
+.babelrc
+node_modules
+android
+ios
+test
+**/__test__/**
+__tests__
