@@ -7,10 +7,16 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../../actions/index';
+import { Button } from 'react-native-elements';
 
 export class Home extends Component {
+  static navigationOptions = {
+    title: 'QuranicAudio',
+  };
+
   render() {
-    const { actions, main } = this.props;
+    const { actions, main, navigation } = this.props;
+    const { navigate } = navigation;
     return (
       <View style={styles.container}>
         <Text style={styles.welcome} onPress={() => actions.addMessage('Quran')}>
@@ -23,10 +29,17 @@ export class Home extends Component {
           Press Cmd+R to reload,{'\n'}
           Cmd+D or shake for dev menu
         </Text>
+
+        <Button
+          icon={{ name: 'user', type: 'font-awesome' }}
+          onPress={() => navigate('Chapters', { name: 'Abdullah Awad al-Juhani' })}
+          title="Abdullah Awad al-Juhani"
+        />
       </View>
     );
   }
 }
+
 
 Home.propTypes = {
   actions: PropTypes.object.isRequired,
