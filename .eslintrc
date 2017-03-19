@@ -29,7 +29,8 @@
   "globals": {
     "expect": true,
     "browser": true,
-    "sinon": true
+    "sinon": true,
+    "fetch": true
   },
   "env": {
     "mocha": true,
