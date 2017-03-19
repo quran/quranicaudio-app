@@ -1,6 +1,6 @@
 # QuranicAudio App [![SLACK](http://i.imgur.com/Lk5HsBo.png)](https://quranslack.herokuapp.com)
 
-Our aim is to launch before Ramadan 2017 (Friday, 26 May), therefore an MVP (Minimal Viable Product) approach would suit us quite well. [QuranicAudio.com](https://quranicAudio.com) has should always be the reference [implementation](https://github.com/quran/audio.quran.com).
+Our aim is to launch before Ramadan 2017 (Friday, 26 May), therefore an MVP (Minimal Viable Product) approach would suit us quite well. [QuranicAudio.com](https://quranicAudio.com) should always be the reference [implementation](https://github.com/quran/audio.quran.com).
 
 # MVP feature list
 
