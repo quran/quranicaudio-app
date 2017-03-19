@@ -20,7 +20,7 @@ Our aim is to launch before Ramadan 2017 (Friday, 26 May), therefore an MVP (Min
 
 Work in progress documentation
 
-## MP3
+### MP3
 
 A URL has to be constructed and should look as such:
 
@@ -37,7 +37,7 @@ the Relative path can be found in each reciter response object. A [reference](ht
 `${AUDIO_URL}/${action.qari.relativePath}${zeroPad(action.surah.id, 3)}.mp3`
 ```
 
-## Reciter (Qari)
+### Reciter (Qari)
 
 ```bash
   curl https://quranicaudio.com/api/qaris/15
@@ -63,7 +63,7 @@ example result:
 
 ```
 
-## List of Reciters (Qaris)
+### List of Reciters (Qaris)
 
 ```bash
   curl https://quranicaudio.com/api/qaris
@@ -132,7 +132,7 @@ example result:
 
 ```
 
-## Sections 
+### Sections 
 
 Each will belong to a segment, such as `Recitations from Haramain Taraweeh` or `Non-Hafs Recitations`
 
