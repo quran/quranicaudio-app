@@ -4,6 +4,7 @@
   "rules": {
     "comma-dangle": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/react-in-jsx-scope": 0,
     "import/no-extraneous-dependencies": 0,
     "import/extensions": 0,
     "import/no-unresolved": 0,
@@ -29,6 +30,7 @@
   "globals": {
     "expect": true,
     "browser": true,
+    "react": true, // we use babel-plugin-react-require, so no required to import react.
     "sinon": true,
     "fetch": true
   },

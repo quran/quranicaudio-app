@@ -3,6 +3,7 @@
         "react-native"
     ],
     "plugins": [
+         "react-require",
         [
             "module-resolver",
             {
