@@ -11,5 +11,4 @@ export const baseHeaderStyle = {
     },
   },
   titleStyle: { color: 'white' },
-  tintColor: 'pink'
 };

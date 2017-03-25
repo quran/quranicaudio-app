@@ -3,12 +3,13 @@ import {
   StyleSheet,
   Text,
   ScrollView,
+  TouchableOpacity,
   View
 } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../../actions/index';
-import { Button } from 'react-native-elements';
+import { List, ListItem, Button } from 'react-native-elements';
 import { baseHeaderStyle } from 'styles/variables';
 
 export class Home extends Component {
@@ -31,30 +32,33 @@ export class Home extends Component {
   render() {
     const { actions, main, navigation, reciters } = this.props;
     const { navigate } = navigation;
+
+    const list = [
+      {
+        title: 'Appointments',
+        icon: 'av-timer'
+      },
+      {
+        title: 'Trips',
+        icon: 'flight-takeoff'
+      }
+    ];
+
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome} onPress={() => actions.addMessage('Quran')}>
-          Welcome to QuranicAudio!
-        </Text>
-        <Text style={styles.instructions}>
-          Listen to some quran from QuranicAudio.com!
-        </Text>
-
-        <ScrollView
-          automaticallyAdjustContentInsets={false}
-          bounces={false}
-          style={[styles.scrollView, styles.horizontalScrollView]}
-        >
-          {reciters.reciters.map(item => <Button
-            key={item.id}
-            icon={{ name: 'user', type: 'font-awesome' }}
-            onPress={() => navigate('Chapters', { name: item.name, data: item })}
-            title={item.name}
-          />)}
-        </ScrollView>
-        <Text style={styles.instructions} />
-
-      </View>
+      <ScrollView style={styles.container} automaticallyAdjustContentInsets={false}>
+        <List containerStyle={styles.listStyle}>
+          {
+            reciters.reciters.map(item => (
+              <ListItem
+                key={item.id}
+                title={item.name}
+                leftIcon={{ name: item.icon }}
+                onPress={() => navigate('Chapters', { name: item.name, data: item })}
+              />
+            ))
+          }
+        </List>
+      </ScrollView>
     );
   }
 }
@@ -79,26 +83,12 @@ function mapDispatchToProps(dispatch) {
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 const styles = StyleSheet.create({
-  scrollView: {
-    height: 300,
-  },
-  horizontalScrollView: {
-    height: 120,
-  },
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    position: 'relative'
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+  listStyle: {
+    flex: 1,
+    width: '100%'
+  }
 });
