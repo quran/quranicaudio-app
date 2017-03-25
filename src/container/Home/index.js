@@ -44,7 +44,7 @@ export class Home extends Component {
       <Container>
         <Content>
           {
-            sortedQaris.map(item => [
+            sortedQaris.map(item => item.qaris.length > 0 && [
               <ListItem itemDivider>
                 <Text>{item.letter}</Text>
               </ListItem>,
