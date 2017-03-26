@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../../actions/index';
 import { Button } from 'react-native-elements';
-import { baseHeaderStyle } from 'styles/variables';
+import { baseHeaderStyle } from '../../styles/variables';
 
 export class Home extends Component {
   static navigationOptions = {
