@@ -1,9 +1,4 @@
-import { HOME, FETCH_RECITERS } from './constants';
-
-export const addMessage = data => ({
-  type: HOME,
-  data
-});
+import { FETCH_RECITERS } from './constants';
 
 export const reciters = data => ({
   type: FETCH_RECITERS,

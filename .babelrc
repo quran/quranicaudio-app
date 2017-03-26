@@ -3,20 +3,6 @@
         "react-native"
     ],
     "plugins": [
-         "react-require",
-        [
-            "module-resolver",
-            {
-                "root": [
-                    "./src"
-                ],
-                "alias": {
-                    "styles": "./styles",
-                    "actions": "./actions",
-                    "containers": "./containers",
-                    "components": "./components"
-                }
-            }
-        ]
+         "react-require"
     ]
 }
