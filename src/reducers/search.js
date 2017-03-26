@@ -6,7 +6,6 @@ export default function reciters(state = { value: '' }, action) {
     case SEARCH:
       return { value: input };
     case SEARCH_CLEAR:
-      console.warn(action.type);
       return { value: '' };
     default:
       return state;

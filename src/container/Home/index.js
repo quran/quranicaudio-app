@@ -54,9 +54,7 @@ export class Home extends Component {
           />
           <Icon
             name="close"
-            onPress={() => {
-              actions.clearSearch();
-            }}
+            onPress={() => actions.clearSearch()}
             size={20} style={style.searchClose}
           />
         </Item>

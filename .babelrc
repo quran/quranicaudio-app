@@ -1,8 +1,22 @@
 {
-    "presets": [
-        "react-native"
+  "presets": [
+    [
+      "es2015",
+      {
+        "modules": false
+      }
     ],
-    "plugins": [
-         "react-require"
-    ]
+    "react-native"
+  ],
+  "plugins": [
+    "react-require"
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        "es2015",
+        "react-native"
+      ]
+    }
+  }
 }
