@@ -1,5 +1,6 @@
 import { PropTypes } from 'react';
 import { connect } from 'react-redux';
+
 import { StackNavigator, addNavigationHelpers } from 'react-navigation';
 import HomeContainer from './Home';
 import Chapters from './Chapters';

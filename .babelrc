@@ -1,22 +1,22 @@
 {
-    "presets": [
-        "react-native"
+  "presets": [
+    [
+      "es2015",
+      {
+        "modules": false
+      }
     ],
-    "plugins": [
-         "react-require",
-        [
-            "module-resolver",
-            {
-                "root": [
-                    "./src"
-                ],
-                "alias": {
-                    "styles": "./styles",
-                    "actions": "./actions",
-                    "containers": "./containers",
-                    "components": "./components"
-                }
-            }
-        ]
-    ]
+    "react-native"
+  ],
+  "plugins": [
+    "react-require"
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        "es2015",
+        "react-native"
+      ]
+    }
+  }
 }
