@@ -457,3 +457,11 @@ Many thanks to [Ahmad Galal](http://ahmedgalal.com/) for the amazing UI he has c
 https://github.com/quran/audio.quran.com
 https://github.com/quran/quran.com-frontend
 https://quranicaudio.com/api
+
+
+#Native-base:
+
+Eject themes:
+```bash
+  node node_modules/native-base/ejectTheme.js
+```

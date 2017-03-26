@@ -1,20 +1,21 @@
 import { Component, PropTypes } from 'react';
 import {
-  StyleSheet,
-  ScrollView,
-  TouchableOpacity,
+  TextInput,
+  Alert,
   View
 } from 'react-native';
-
-// components
-import AudioPlayer from '../../components/AudioPlayer';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../../actions/index';
-import { Container, Content, ListItem, Text, Spinner } from 'native-base';
 import { baseHeaderStyle } from 'styles/variables';
-import formatQarisByLetter from '../../utils/sortNames';
+
+// components
+import AudioPlayer from '../../components/AudioPlayer';
+import QariList from '../../components/QariList';
+
+import { Container, Spinner, Item } from 'native-base';
+import Icon from 'react-native-vector-icons/EvilIcons';
 
 export class Home extends Component {
   static navigationOptions = {
@@ -34,59 +35,44 @@ export class Home extends Component {
   }
 
   render() {
-    const { actions, main, navigation, reciters } = this.props;
+    const { navigation, reciters, actions, search } = this.props;
     const { navigate } = navigation;
+    if (reciters.length < 1) return <View style={{ flex: 1, justifyContent: 'center' }}><Spinner color="#13a5ae" /></View>;
 
-    if (reciters.reciters.length < 1) return <View style={{ flex: 1 }}><Spinner color="#13a5ae" /></View>;
-
-    const sortedQaris = formatQarisByLetter(reciters.reciters);
     return (
       <Container>
-        <Content>
-          {
-            sortedQaris.map(item => item.qaris.length > 0 && [
-              <ListItem itemDivider>
-                <Text>{item.letter}</Text>
-              </ListItem>,
-              item.qaris.map(qari => <ListItem onPress={() => navigate('Chapters', { name: qari.name, data: qari })}>
-                <Text>{qari.name}</Text>
-              </ListItem>)])
-        }
-        </Content>
-
+        <Item style={{ backgroundColor: 'white' }}>
+          <Icon name="search" size={30} style={{ backgroundColor: 'transparent', position: 'absolute', zIndex: 5, left: 15, top: 20 }} />
+          <TextInput
+            style={{ marginTop: 10, marginBottom: 10, marginLeft: 5, marginRight: 5, height: 45, backgroundColor: '#eceff1', flex: 1, borderRadius: 20, paddingLeft: 50 }}
+            placeholder="Search…"
+            keyboardType="web-search"
+            onChangeText={text => actions.search(text)}
+            value={search}
+          />
+          <Icon
+            name="close"
+            onPress={() => Alert.alert('Hello')}
+            size={20} style={{ position: 'absolute', right: 15, backgroundColor: 'transparent', alignItems: 'flex-end' }}
+          />
+        </Item>
+        <View />
+        <QariList reciters={reciters} actions={{ navigate }} search={search} />
+        <AudioPlayer />
       </Container>
     );
-
-    // return (
-    //   <View style={{ flex: 1 }}>
-    //     <Content>
-    // {
-    //   reciters.reciters.map(item => (
-    //     <ListItem
-    //       key={item.id}
-    //       title={item.name}
-    //       leftIcon={{ name: item.icon }}
-    //       onPress={() => navigate('Chapters', { name: item.name, data: item })}
-    //     />
-    //   ))
-    // }
-    //     </Content>
-    //     <AudioPlayer style={{ position: 'absolute', left: 0, right: 0, bottom: 0 }} />
-    //   </View>
-    // );
   }
 }
 
-
 Home.propTypes = {
-  actions: PropTypes.object.isRequired,
-  main: PropTypes.object.isRequired
+  actions: PropTypes.object.isRequired
 };
 
 function mapStateToProps(state) {
   return {
-    reciters: state.reciters,
-    main: state.main
+    reciters: state.reciters.reciters,
+    main: state.main,
+    search: state.search
   };
 }
 
@@ -95,28 +81,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    position: 'relative'
-  },
-  listStyle: {
-    flex: 1,
-    width: '100%'
-  }
-});
-// sortedQaris.qaris.map(item => {<ListItem itemDivider>
-              // <Text>{item.letter}</Text></ListItem>})
-        // {
-        //   sortedQaris.map(item => (
-        //     <Content>
-        //       <ListItem itemDivider>
-        //         <Text>A</Text>
-        //       </ListItem>
-        //       <ListItem
-        //         key={item.id} onPress={() => navigate('Chapters', { name: item.name, data: item })}
-        //       ><Text>{item.letter}</Text></ListItem>
-        //     </Content>
-        //   ))
-        // }
