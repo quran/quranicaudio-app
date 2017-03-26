@@ -19,6 +19,8 @@ import Loader from '../../components/common/Loader';
 import { Container, Item } from 'native-base';
 import Icon from 'react-native-vector-icons/EvilIcons';
 
+
+
 export class Home extends Component {
   static navigationOptions = {
     title: 'QuranicAudio App',
