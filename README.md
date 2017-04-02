@@ -200,7 +200,7 @@ example result:
 List of all chapters. We should probably use the new Quran.com Api.
 
 ```bash
-  curl https://quranicaudio.com/api/sections
+  curl https://quranicaudio.com/api/surahs
 ```
 example result:
 
