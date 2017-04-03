@@ -13,12 +13,11 @@ import { baseHeaderStyle } from '../../styles/variables';
 
 // components
 import AudioPlayer from '../../components/AudioPlayer';
-import QariList from '../../components/QariList';
+import ReciterList from '../../components/ReciterList';
 import Loader from '../../components/common/Loader';
 
 import { Container, Item } from 'native-base';
 import Icon from 'react-native-vector-icons/EvilIcons';
-
 
 
 export class Home extends Component {
@@ -61,7 +60,7 @@ export class Home extends Component {
           />
         </Item>
         <View />
-        <QariList reciters={reciters} actions={{ navigate }} search={search} />
+        <ReciterList reciters={reciters} actions={{ navigate }} search={search} />
         <AudioPlayer />
       </Container>
     );

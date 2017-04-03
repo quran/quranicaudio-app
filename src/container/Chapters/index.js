@@ -1,7 +1,6 @@
 import { Component, PropTypes } from 'react';
 import {
   TextInput,
-  Alert,
   StyleSheet,
   View
 } from 'react-native';
@@ -20,10 +19,9 @@ import { Container, Item } from 'native-base';
 import Icon from 'react-native-vector-icons/EvilIcons';
 
 
-
 export class Chapters extends Component {
   static navigationOptions = {
-    title: 'Chapters list',
+    title: ({ state }) => state.params.name,
     header: ({ state, setParams }, defaultHeader) => ({
       ...defaultHeader,
       ...baseHeaderStyle
