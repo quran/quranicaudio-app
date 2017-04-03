@@ -8,7 +8,7 @@ export default ({ reciters, actions }) => {
     sortedQaris.map(({ letter, qaris }) => [
       <ListItem itemDivider><Text>{letter}</Text></ListItem>,
       qaris.map(qari =>
-        <ListItem onPress={() => actions.navigate('Chapters', { name: qari.name, data: qari })}>
+        <ListItem onPress={() => actions.navigate('Surahs', { name: qari.name, data: qari })}>
           <Text>{qari.name}</Text>
         </ListItem>)
     ]
