@@ -4,12 +4,10 @@ import { connect } from 'react-redux';
 import { StackNavigator, addNavigationHelpers } from 'react-navigation';
 import HomeContainer from './Home';
 import Chapters from './Chapters';
-import Surahs from './Surahs';
 
 export const AppNavigator = StackNavigator({
   Home: { screen: HomeContainer },
-  Chapters: { screen: Chapters },
-  Surahs: {screen: Surahs}
+  Chapters: { screen: Chapters }
 });
 
 const AppWithNavigationState = ({ dispatch, navigation }) => (<AppNavigator

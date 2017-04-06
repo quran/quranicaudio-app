@@ -6,7 +6,7 @@ export const chapters = data => ({
 });
 
 export const getChapters = () => {
-  const url = 'https://quranicaudio.com/api/sections';
+  const url = 'https://quranicaudio.com/api/surahs';
 
   return dispatch => fetch(url)
     .then(response => response.json())
