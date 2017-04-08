@@ -1,7 +1,6 @@
 import { Component, PropTypes } from 'react';
 import {
   TextInput,
-  Alert,
   StyleSheet,
   View
 } from 'react-native';
@@ -15,10 +14,9 @@ import { baseHeaderStyle } from '../../styles/variables';
 import AudioPlayer from '../../components/AudioPlayer';
 import ReciterList from '../../components/ReciterList';
 import Loader from '../../components/common/Loader';
+import Search from '../../components/common/Search';
 
-import { Container, Item } from 'native-base';
-import Icon from 'react-native-vector-icons/EvilIcons';
-
+import { Container } from 'native-base';
 
 export class Home extends Component {
   static navigationOptions = {
@@ -43,22 +41,8 @@ export class Home extends Component {
     if (reciters.length < 1) return <Loader />;
 
     return (
-      <Container>
-        <Item style={{ backgroundColor: 'white' }}>
-          <Icon name="search" size={30} style={style.searchIcon} />
-          <TextInput
-            style={style.search}
-            placeholder="Search…"
-            keyboardType="web-search"
-            onChangeText={text => actions.search(text)}
-            value={search.value}
-          />
-          <Icon
-            name="close"
-            onPress={() => actions.clearSearch()}
-            size={20} style={style.searchClose}
-          />
-        </Item>
+      <Container style={{ flex: 1, backgroundColor: '#FFF' }}>
+        <Search value={search.value} actions={actions} />
         <View />
         <ReciterList reciters={reciters} actions={{ navigate }} search={search} />
         <AudioPlayer />
@@ -82,33 +66,5 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return { actions: bindActionCreators(Actions, dispatch), dispatch };
 }
-
-const style = StyleSheet.create({
-  search: {
-    marginTop: 10,
-    marginBottom: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    height: 45,
-    backgroundColor: '#eceff1',
-    flex: 1,
-    borderRadius: 20,
-    paddingLeft: 50
-  },
-  searchIcon: {
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    zIndex: 5,
-    left: 15,
-    top: 20
-  },
-  searchClose: {
-    position: 'absolute',
-    right: 15,
-    backgroundColor: 'transparent',
-    alignItems: 'flex-end'
-  }
-});
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

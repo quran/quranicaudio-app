@@ -9,7 +9,7 @@ const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(reducers(AppNavigator));
 const Main = () => (
   <Provider store={store}>
-    <View style={{ flex: 1 }}>
+    <View style={{ flex: 1, backgroundColor: '#FFF' }}>
       <StatusBar barStyle="light-content" translucent />
       <Root />
     </View>

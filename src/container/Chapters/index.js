@@ -1,8 +1,6 @@
 import { Component, PropTypes } from 'react';
 import {
-  TextInput,
-  StyleSheet,
-  View
+  StyleSheet
 } from 'react-native';
 
 import { connect } from 'react-redux';
@@ -14,10 +12,9 @@ import { baseHeaderStyle } from '../../styles/variables';
 import AudioPlayer from '../../components/AudioPlayer';
 import ChapterList from '../../components/ChapterList';
 import Loader from '../../components/common/Loader';
+import Search from '../../components/common/Search';
 
-import { Container, Item } from 'native-base';
-import Icon from 'react-native-vector-icons/EvilIcons';
-
+import { Container } from 'native-base';
 
 export class Chapters extends Component {
   static navigationOptions = {
@@ -33,33 +30,19 @@ export class Chapters extends Component {
   };
 
   componentDidMount() {
+    const { id } = this.props.navigation.state.params.data;
+    this.props.actions.getFiles(id);
     this.props.actions.getChapters();
   }
 
   render() {
-    const { navigation, chapters, actions, search } = this.props;
+    const { navigation, chapters, actions, search, files } = this.props;
     const { navigate } = navigation;
-    if (chapters.length < 1) return <Loader />;
-
+    if (chapters.length < 1 || files.length < 1) return <Loader />;
     return (
-      <Container>
-        <Item style={{ backgroundColor: 'white' }}>
-          <Icon name="search" size={30} style={style.searchIcon} />
-          <TextInput
-            style={style.search}
-            placeholder="Search…"
-            keyboardType="web-search"
-            onChangeText={text => actions.search(text)}
-            value={search.value}
-          />
-          <Icon
-            name="close"
-            onPress={() => actions.clearSearch()}
-            size={20} style={style.searchClose}
-          />
-        </Item>
-        <View />
-        <ChapterList chapters={chapters} actions={{ navigate }} search={search} />
+      <Container style={{ backgroundColor: '#FFF' }}>
+        <Search value={search.value} actions={actions} />
+        <ChapterList chapters={chapters} actions={{ navigate }} search={search.value} files={files} />
         <AudioPlayer />
       </Container>
     );
@@ -74,7 +57,8 @@ function mapStateToProps(state) {
   return {
     chapters: state.chapters.chapters,
     main: state.main,
-    search: state.search
+    search: state.search,
+    files: state.files.data
   };
 }
 
@@ -83,29 +67,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 const style = StyleSheet.create({
-  search: {
-    marginTop: 10,
-    marginBottom: 10,
-    marginLeft: 5,
-    marginRight: 5,
-    height: 45,
-    backgroundColor: '#eceff1',
-    flex: 1,
-    borderRadius: 20,
-    paddingLeft: 50
-  },
-  searchIcon: {
-    backgroundColor: 'transparent',
-    position: 'absolute',
-    zIndex: 5,
-    left: 15,
-    top: 20
-  },
-  searchClose: {
-    position: 'absolute',
-    right: 15,
-    backgroundColor: 'transparent',
-    alignItems: 'flex-end'
+  container: {
+    paddingBottom: 50
   }
 });
 
