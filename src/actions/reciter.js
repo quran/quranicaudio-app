@@ -11,5 +11,8 @@ export const getReciters = () => {
   return dispatch => fetch(url)
     .then(response => response.json())
     .then(data => dispatch(reciters(data)))
-    .catch(error => console.warn(error));
+    .catch((error) => {
+      console.warn(error);
+      dispatch(reciters([]));
+    });
 };

@@ -11,5 +11,8 @@ export const getChapters = () => {
   return dispatch => fetch(url)
     .then(response => response.json())
     .then(data => dispatch(chapters(data)))
-    .catch(error => console.warn(error));
+    .catch((error) => {
+      console.warn(error);
+      dispatch(chapters([]));
+    });
 };
