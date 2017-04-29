@@ -21,7 +21,7 @@ import Icon from 'react-native-vector-icons/EvilIcons';
 
 export class Chapters extends Component {
   static navigationOptions = {
-    title: ({ state }) => state.params.name,
+    title: ({ state }) => state.params.reciter.name,
     header: ({ state, setParams }, defaultHeader) => ({
       ...defaultHeader,
       ...baseHeaderStyle
@@ -39,6 +39,8 @@ export class Chapters extends Component {
   render() {
     const { navigation, chapters, actions, search } = this.props;
     const { navigate } = navigation;
+    const reciter = navigation.state.params.reciter;
+    
     if (chapters.length < 1) return <Loader />;
 
     return (
@@ -59,7 +61,7 @@ export class Chapters extends Component {
           />
         </Item>
         <View />
-        <ChapterList chapters={chapters} actions={{ navigate }} search={search} />
+        <ChapterList chapters={chapters} reciter={{ reciter }} actions={{ navigate }}  search={search} />
         <AudioPlayer />
       </Container>
     );

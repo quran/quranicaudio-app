@@ -6,7 +6,7 @@ export default (props) => {
     formatRecitersByLetter(props.reciters).map(({ letter, reciters }) => [
       <ListItem itemDivider><Text>{letter}</Text></ListItem>,
       reciters.map(reciter =>
-        <ListItem onPress={() => props.actions.navigate('Chapters', { name: reciter.name, data: reciter })}>
+        <ListItem onPress={() => props.actions.navigate('Chapters', { reciter: reciter })}>
           <Text>{reciter.name}</Text>
         </ListItem>)
     ]
