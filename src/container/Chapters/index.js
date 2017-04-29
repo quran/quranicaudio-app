@@ -40,7 +40,7 @@ export class Chapters extends Component {
     const { navigation, chapters, actions, search } = this.props;
     const { navigate } = navigation;
     const reciter = navigation.state.params.reciter;
-    
+
     if (chapters.length < 1) return <Loader />;
 
     return (
@@ -61,7 +61,7 @@ export class Chapters extends Component {
           />
         </Item>
         <View />
-        <ChapterList chapters={chapters} reciter={{ reciter }} actions={{ navigate }}  search={search} />
+        <ChapterList chapters={chapters} reciter={ reciter } actions={{ navigate }}  search={search} />
         <AudioPlayer />
       </Container>
     );
