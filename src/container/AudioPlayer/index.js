@@ -24,28 +24,31 @@ class AudioPlayer extends Component {
   constructor(props){
     super(props);
 
-    let songs = [{
-        title: "Al lail",
-        thumb: "http://www.assabile.com/media/person/200x256/mishary-rashid-alafasy.png",
-        artist: "Abdullaah Alee Jaabir",
-        songDuration: "17001",
-        path: "https://download.quranicaudio.com/quran/abdullaah_alee_jaabir_studio/092.mp3"
-      },
-      {
-        title: "Al dohah",
-        thumb: "http://www.assabile.com/media/person/200x256/mishary-rashid-alafasy.png",
-        artist: "Abdullaah Alee Jaabir",
-        songDuration: "14001",
-        path: "https://download.quranicaudio.com/quran/abdullaah_alee_jaabir_studio/093.mp3"
-      },
-      {
-        title: "Al sharh",
-        thumb: "http://www.assabile.com/media/person/200x256/mishary-rashid-alafasy.png",
-        artist: "Abdullaah Alee Jaabir",
-        songDuration: "12001",
-        path: "https://download.quranicaudio.com/quran/abdullaah_alee_jaabir_studio/094.mp3"
-      }
-    ];
+    let songs = this.props.navigation.state.params.chapters.chapters;
+
+    // let songs = [{
+    //     title: "Al lail",
+    //     thumb: "http://www.assabile.com/media/person/200x256/mishary-rashid-alafasy.png",
+    //     artist: "Abdullaah Alee Jaabir",
+    //     songDuration: "17001",
+    //     path: "https://download.quranicaudio.com/quran/abdullaah_alee_jaabir_studio/092.mp3"
+    //   },
+    //   {
+    //     title: "Al dohah",
+    //     thumb: "http://www.assabile.com/media/person/200x256/mishary-rashid-alafasy.png",
+    //     artist: "Abdullaah Alee Jaabir",
+    //     songDuration: "14001",
+    //     path: "https://download.quranicaudio.com/quran/abdullaah_alee_jaabir_studio/093.mp3"
+    //   },
+    //   {
+    //     title: "Al sharh",
+    //     thumb: "http://www.assabile.com/media/person/200x256/mishary-rashid-alafasy.png",
+    //     artist: "Abdullaah Alee Jaabir",
+    //     songDuration: "12001",
+    //     path: "https://download.quranicaudio.com/quran/abdullaah_alee_jaabir_studio/094.mp3"
+    //   }
+    // ];
+
 
     this.state = {
       playing: true,
@@ -53,7 +56,7 @@ class AudioPlayer extends Component {
       shuffle: false,
       sliding: false,
       currentTime: 0,
-      songIndex: 1,
+      songIndex: this.props.navigation.state.params.chapters.selected_chapter-1,
       songs: songs
     };
   }
@@ -197,19 +200,9 @@ class AudioPlayer extends Component {
     return (
       <View style={Styles.container}>
         {this.renderVideoPlayer()}
-        <View style={ Styles.header }>
-          <Text style={ Styles.headerText }>
-            {this.state.songs[this.state.songIndex].artist}
-          </Text>
-        </View>
-        <View style={ Styles.headerClose }>
-          <FontAwesome onPress={ Actions.pop } name="chevron-left" size={15} color="#fff" />
-        </View>
-        <DownloadButton
-          download={this.props.searchedSongs}
-          downloading={this.state.songs[this.state.songIndex].downloading}
-          downloadMusic={() => this.props.onMusicDownload(this.state.songs[this.state.songIndex])}
-        />
+        
+        
+        
         {this.renderProgressBar()}
         <Image
           style={ Styles.songImage }
