@@ -51,12 +51,12 @@
     "preset": "react-native"
   },
   "pre-commit": [
-    "lint",
-    "test"
+    "precommit"
   ],
   "lint-staged": {
     "*.js": [
       "npm run prettier",
+      "npm run lint:fix",
       "git add"
     ]
   }

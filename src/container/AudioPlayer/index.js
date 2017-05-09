@@ -5,18 +5,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Video from 'react-native-video';
 import Styles from '../../styles';
-import * as Utils from '../../utils/audio';
+import * as Utils from "../../utils/audio"; //eslint-disable-line
 import {
   ForwardButton,
   BackwardButton,
   PlayButton,
   ShuffleButton,
   VolumeButton,
-  DownloadButton,
+  DownloadButton, //eslint-disable-line
   SongSlider
 } from '../../components/PlayerButtons';
 import MusicControl from 'react-native-music-control';
-import * as Progress from 'react-native-progress';
+import * as Progress from "react-native-progress"; //eslint-disable-line
 const { width } = Dimensions.get('window');
 import { autobind } from 'core-decorators';
 
@@ -61,6 +61,32 @@ import { autobind } from 'core-decorators';
     };
   }
 
+  songImage = '';
+
+  componentDidMount() {
+    MusicControl.enableControl('play', true);
+    MusicControl.enableControl('pause', true);
+    MusicControl.enableControl('nextTrack', true);
+    MusicControl.enableControl('previousTrack', true);
+    MusicControl.enableControl('seekForward', false);
+    MusicControl.enableControl('seekBackward', false);
+    MusicControl.enableBackgroundMode(true);
+    MusicControl.on('play', () => {
+      this.setState({ playing: true });
+    });
+    MusicControl.on('pause', () => {
+      this.setState({ playing: false });
+    });
+    MusicControl.on('nextTrack', this.goForward);
+    MusicControl.on('previousTrack', this.goBackward);
+  }
+
+  // eslint-disable-next-line
+  onLoad(params) {
+    this.setState({ songDuration: params.duration });
+    this.setPlayingSong();
+  }
+
   setPlayingSong() {
     const song = this.state.songs[this.state.songIndex];
     MusicControl.setNowPlaying({
@@ -71,62 +97,27 @@ import { autobind } from 'core-decorators';
     });
   }
 
-  togglePlay() {
-    this.setState({ playing: !this.state.playing });
+  setTime(params) {
+    if (!this.state.sliding) {
+      this.setState({ currentTime: params.currentTime });
+    }
   }
 
-  toggleVolume() {
-    this.setState({ muted: !this.state.muted });
+  randomSongIndex() {
+    const maxIndex = this.state.songs.length - 1;
+    return Math.floor(Math.random() * ((maxIndex - 0) + 1)) + 0;
   }
 
   toggleShuffle() {
     this.setState({ shuffle: !this.state.shuffle });
   }
 
-  goBackward() {
-    if (this.state.currentTime < 3 && this.state.songIndex !== 0) {
-      this.setState({
-        songIndex: this.state.songIndex - 1,
-        currentTime: 0
-      });
-    } else {
-      this.refs.audio.seek(0);
-      this.setState({
-        currentTime: 0
-      });
-    }
+  toggleVolume() {
+    this.setState({ muted: !this.state.muted });
   }
 
-  goForward() {
-    if (
-      this.state.shuffle ||
-      this.state.songIndex + 1 != this.state.songs.length
-    ) {
-      this.setState({
-        songIndex: this.state.shuffle
-          ? this.randomSongIndex()
-          : this.state.songIndex + 1,
-        currentTime: 0,
-        playing: true
-      });
-      this.refs.audio.seek(0);
-    }
-  }
-
-  randomSongIndex() {
-    const maxIndex = this.state.songs.length - 1;
-    return Math.floor(Math.random() * (maxIndex - 0 + 1)) + 0;
-  }
-
-  onLoad(params) {
-    this.setState({ songDuration: params.duration });
-    this.setPlayingSong();
-  }
-
-  setTime(params) {
-    if (!this.state.sliding) {
-      this.setState({ currentTime: params.currentTime });
-    }
+  togglePlay() {
+    this.setState({ playing: !this.state.playing });
   }
 
   onSlidingStart() {
@@ -139,8 +130,38 @@ import { autobind } from 'core-decorators';
   }
 
   onSlidingComplete() {
-    this.refs.audio.seek(this.state.currentTime);
+    this.refs.audio.seek(this.state.currentTime); //eslint-disable-line
     this.setState({ sliding: false });
+  }
+
+  goForward() {
+    if (
+      this.state.shuffle ||
+      this.state.songIndex + 1 !== this.state.songs.length
+    ) {
+      this.setState({
+        songIndex: this.state.shuffle
+          ? this.randomSongIndex()
+          : this.state.songIndex + 1,
+        currentTime: 0,
+        playing: true
+      });
+      this.refs.audio.seek(0); //eslint-disable-line
+    }
+  }
+
+  goBackward() {
+    if (this.state.currentTime < 3 && this.state.songIndex !== 0) {
+      this.setState({
+        songIndex: this.state.songIndex - 1,
+        currentTime: 0
+      });
+    } else {
+      this.refs.audio.seek(0); //eslint-disable-line
+      this.setState({
+        currentTime: 0
+      });
+    }
   }
 
   onEnd() {
@@ -169,25 +190,6 @@ import { autobind } from 'core-decorators';
     return null;
   }
 
-  componentDidMount() {
-    MusicControl.enableControl('play', true);
-    MusicControl.enableControl('pause', true);
-    MusicControl.enableControl('nextTrack', true);
-    MusicControl.enableControl('previousTrack', true);
-    MusicControl.enableControl('seekForward', false);
-    MusicControl.enableControl('seekBackward', false);
-    MusicControl.enableBackgroundMode(true);
-    MusicControl.on('play', () => {
-      this.setState({ playing: true });
-    });
-    MusicControl.on('pause', () => {
-      this.setState({ playing: false });
-    });
-    MusicControl.on('nextTrack', this.goForward);
-    MusicControl.on('previousTrack', this.goBackward);
-  }
-
-  songImage = '';
 
   renderProgressBar() {
     if (this.props.searchedSongs) {
@@ -218,7 +220,10 @@ import { autobind } from 'core-decorators';
         {this.renderProgressBar()}
         <Image
           style={Styles.songImage}
-          source={{ uri: (Platform.OS === 'android' ? 'file://' : '') + this.state.songs[this.state.songIndex].thumb }}
+          source={{
+            uri: (Platform.OS === 'android' ? 'file://' : '') +
+              this.state.songs[this.state.songIndex].thumb
+          }}
         />
 
         {this.renderProgressBar()}

@@ -1,7 +1,6 @@
 import { Component, PropTypes } from 'react';
 import {
   TextInput,
-  Alert,
   StyleSheet,
   View
 } from 'react-native';
