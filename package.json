@@ -9,7 +9,7 @@
     "lint:fix": "npm run lint -- --fix",
     "postinstall": "react-native link",
     "prettier": "prettier --single-quote --write",
-    "precommit": "lint-staged"
+    "precommit-hook": "lint-staged"
   },
   "dependencies": {
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
@@ -51,7 +51,7 @@
     "preset": "react-native"
   },
   "pre-commit": [
-    "precommit"
+    "npm run recommit-hook"
   ],
   "lint-staged": {
     "*.js": [

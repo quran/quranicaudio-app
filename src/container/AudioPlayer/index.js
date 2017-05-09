@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Video from 'react-native-video';
 import Styles from '../../styles';
-import * as Utils from "../../utils/audio"; //eslint-disable-line
+import * as Utils from '../../utils/audio'; //eslint-disable-line
 import {
   ForwardButton,
   BackwardButton,
@@ -16,7 +16,7 @@ import {
   SongSlider
 } from '../../components/PlayerButtons';
 import MusicControl from 'react-native-music-control';
-import * as Progress from "react-native-progress"; //eslint-disable-line
+import * as Progress from 'react-native-progress'; //eslint-disable-line
 const { width } = Dimensions.get('window');
 import { autobind } from 'core-decorators';
 
@@ -105,7 +105,7 @@ import { autobind } from 'core-decorators';
 
   randomSongIndex() {
     const maxIndex = this.state.songs.length - 1;
-    return Math.floor(Math.random() * ((maxIndex - 0) + 1)) + 0;
+    return Math.floor(Math.random() * (maxIndex - 0 + 1)) + 0; //eslint-disable-line
   }
 
   toggleShuffle() {
@@ -189,7 +189,6 @@ import { autobind } from 'core-decorators';
     }
     return null;
   }
-
 
   renderProgressBar() {
     if (this.props.searchedSongs) {
