@@ -1,22 +1,20 @@
-import {AsyncStorage} from 'react-native';
+import { AsyncStorage } from 'react-native';
 
-function withLeadingZero(amount){
-  if (amount < 10 ){
-    return `0${ amount }`;
-  } else {
-    return `${ amount }`;
+function withLeadingZero(amount) {
+  if (amount < 10) {
+    return `0${amount}`;
   }
+  return `${amount}`;
 }
 
-export function formattedTime( timeInSeconds ){
-  let minutes = Math.floor(timeInSeconds / 60);
-  let seconds = timeInSeconds - minutes * 60;
+export function formattedTime(timeInSeconds) {
+  const minutes = Math.floor(timeInSeconds / 60);
+  const seconds = timeInSeconds - minutes * 60;
 
-  if( isNaN(minutes) || isNaN(seconds) || minutes < 0 && seconds < 0){
-    return "";
-  } else {
-    return(`${ withLeadingZero( minutes ) }:${ withLeadingZero( seconds.toFixed(0) ) }`);
+  if (isNaN(minutes) || isNaN(seconds) || minutes < 0 && seconds < 0) {
+    return '';
   }
+  return (`${withLeadingZero(minutes)}:${withLeadingZero(seconds.toFixed(0))}`);
 }
 
 export function findSongInCollection(id, songs) {
@@ -24,11 +22,11 @@ export function findSongInCollection(id, songs) {
 }
 
 export function isAudioObject(contentType) {
-  return contentType == "audio/mpeg";
+  return contentType == 'audio/mpeg';
 }
 
 export function getSongName(contentDescription) {
-    return contentDescription.split("=")[1].replace(/"/g, "").split(".mp3")[0];
+  return contentDescription.split('=')[1].replace(/"/g, '').split('.mp3')[0];
 }
 
 

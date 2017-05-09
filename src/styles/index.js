@@ -1,6 +1,6 @@
 import { StyleSheet, Dimensions } from 'react-native';
 
-let {height, width} = Dimensions.get('window');
+const { height, width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   homeContainer: {
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     height: 20,
     width: width - 150,
     borderBottomWidth: 1,
-    borderBottomColor: "#000"
+    borderBottomColor: '#000'
   },
   container: {
     flex: 1,
@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
   header: {
     marginTop: 17,
     marginBottom: 17,
-    width: window.width,
+    width,
   },
   headerClose: {
     position: 'absolute',
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
     paddingRight: 20,
   },
   headerText: {
-    color: "#FFF",
+    color: '#FFF',
     fontSize: 18,
     textAlign: 'center',
   },
@@ -55,15 +55,15 @@ const styles = StyleSheet.create({
     height: 300
   },
   songTitle: {
-    color: "white",
-    fontFamily: "Helvetica Neue",
+    color: 'white',
+    fontFamily: 'Helvetica Neue',
     marginBottom: 10,
     marginTop: 13,
     fontSize: 19
   },
   albumTitle: {
-    color: "#BBB",
-    fontFamily: "Helvetica Neue",
+    color: '#BBB',
+    fontFamily: 'Helvetica Neue',
     fontSize: 14,
     marginBottom: 20,
   },
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     height: 60,
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: "#f1f0f0"
+    borderBottomColor: '#f1f0f0'
   },
   songView: {
     flex: 1,
@@ -138,18 +138,18 @@ const styles = StyleSheet.create({
   },
   songTitleContainer: {
     flex: 1,
-    flexDirection: "column",
-    alignItems: "flex-start",
+    flexDirection: 'column',
+    alignItems: 'flex-start',
     paddingLeft: 10,
-    justifyContent: "space-around"
+    justifyContent: 'space-around'
   },
   songArtistText: {
     fontSize: 16,
-    color: "#333"
+    color: '#333'
   },
   songTitleText: {
     fontSize: 12,
-    color: "#c8c3c3"
+    color: '#c8c3c3'
   },
   noPaddingHorizontal: {
     paddingHorizontal: 0

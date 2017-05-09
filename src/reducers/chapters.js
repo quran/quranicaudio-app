@@ -1,7 +1,6 @@
 import { FETCH_CHAPTERS, FETCH_CHAPTERS_FAIL } from '../actions/constants';
 
 export default function chapters(state = { chapters: [], status: 'none' }, action) {
-  
   const { type, data } = action;
 
   switch (type) {
