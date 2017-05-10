@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import { StackNavigator, addNavigationHelpers } from 'react-navigation';
 import HomeContainer from './Home';
-import Chapters from './Chapters';
+import Chapters from './Chapters'; //eslint-disable-line
 import AudioPlayer from './AudioPlayer';
 
 export const AppNavigator = StackNavigator({

@@ -61,7 +61,7 @@ export class Chapters extends Component {
           />
         </Item>
         <View />
-        <ChapterList chapters={chapters} reciter={ reciter } actions={{ navigate }}  search={search} />
+        <ChapterList chapters={chapters} reciter={reciter} actions={{ navigate }} search={search} />
         <AudioPlayer />
       </Container>
     );
