@@ -19,6 +19,7 @@ import MusicPlayer from '../../utils/MusicPlayer';
 import * as Progress from 'react-native-progress'; //eslint-disable-line
 const {width} = Dimensions.get('window');
 import {autobind} from 'core-decorators';
+import Loader from '../../components/common/Loader';
 
 @autobind
 class AudioPlayer extends Component {
@@ -26,6 +27,8 @@ class AudioPlayer extends Component {
         super(props);
 
         const songs = this.props.navigation.state.params.chapters.chapters;
+
+
 
         this.state = {
             playing: true,
@@ -54,6 +57,10 @@ class AudioPlayer extends Component {
         MusicPlayer.onForward(this.goForward);
 
         MusicPlayer.onBackward(this.goBackward);
+
+        // Set songs for the global state
+        this.props.actions.setSongsList(this.state.songs);
+        this.props.actions.setSelectedSongIndex(this.state.songIndex);
     }
 
     // eslint-disable-next-line
@@ -63,7 +70,7 @@ class AudioPlayer extends Component {
     }
 
     setPlayingSong() {
-        const song = this.state.songs[this.state.songIndex];
+        const song = this.props.songs[this.props.songIndex];
 
         MusicPlayer.setNowPlaying({
             title: song.title,
@@ -80,7 +87,7 @@ class AudioPlayer extends Component {
     }
 
     randomSongIndex() {
-        const maxIndex = this.state.songs.length - 1;
+        const maxIndex = this.props.songs.length - 1;
         return Math.floor(Math.random() * (maxIndex - 0 + 1)) + 0; //eslint-disable-line
     }
 
@@ -113,25 +120,30 @@ class AudioPlayer extends Component {
     goForward() {
         if (
             this.state.shuffle ||
-            this.state.songIndex + 1 !== this.state.songs.length
+            this.props.songIndex + 1 !== this.props.songs.length
         ) {
             this.setState({
-                songIndex: this.state.shuffle
+                songIndex: this.props.shuffle
                     ? this.randomSongIndex()
-                    : this.state.songIndex + 1,
+                    : this.props.songIndex + 1,
                 currentTime: 0,
                 playing: true
             });
             this.refs.audio.seek(0); //eslint-disable-line
+
+            this.props.actions.setSelectedSongIndex(this.props.songIndex + 1);
         }
     }
 
     goBackward() {
-        if (this.state.currentTime < 3 && this.state.songIndex !== 0) {
+        if (this.state.currentTime < 3 && this.props.songIndex !== 0) {
             this.setState({
-                songIndex: this.state.songIndex - 1,
+                songIndex: this.props.songIndex - 1,
                 currentTime: 0
             });
+
+            this.props.actions.setSelectedSongIndex(this.props.songIndex - 1);
+
         } else {
             this.refs.audio.seek(0); //eslint-disable-line
             this.setState({
@@ -146,15 +158,15 @@ class AudioPlayer extends Component {
     }
 
     renderVideoPlayer() {
-        if (this.state.songs[this.state.songIndex]) {
+        if (this.props.songs[this.props.songIndex]) {
             return (
                 <Video
-                    source={{uri: this.state.songs[this.state.songIndex].path}}
+                    source={{uri: this.props.songs[this.props.songIndex].path}}
                     volume={this.state.muted ? 0 : 1.0}
                     muted={false}
                     ref="audio"
                     paused={!this.state.playing}
-                    playInBackground
+                    playInBackground={true}
                     onLoad={this.onLoad}
                     onProgress={this.setTime}
                     onEnd={this.onEnd}
@@ -168,7 +180,7 @@ class AudioPlayer extends Component {
 
     renderProgressBar() {
         if (this.props.searchedSongs) {
-            const song = this.state.songs[this.state.songIndex];
+            const song = this.props.songs[this.props.songIndex];
             return (
                 <Progress.Bar
                     progress={this.props.progreses[song.id]}
@@ -182,6 +194,11 @@ class AudioPlayer extends Component {
     }
 
     render() {
+
+        if(this.props.songs < 1) {
+            return <Loader/>;
+        }
+
         let songPercentage;
         if (this.state.songDuration !== undefined) {
             songPercentage = this.state.currentTime / this.state.songDuration;
@@ -197,13 +214,13 @@ class AudioPlayer extends Component {
                     style={Styles.songImage}
                     source={{
                         uri: (Platform.OS === 'android' ? 'file://' : '') +
-                        this.state.songs[this.state.songIndex].thumb
+                        this.props.songs[this.props.songIndex].thumb
                     }}
                 />
 
                 {this.renderProgressBar()}
                 <Text style={Styles.songTitle}>
-                    {this.state.songs[this.state.songIndex].title}
+                    {this.props.songs[this.props.songIndex].title}
                 </Text>
                 <SongSlider
                     onSlidingStart={this.onSlidingStart}
@@ -225,9 +242,9 @@ class AudioPlayer extends Component {
                         playing={this.state.playing}
                     />
                     <ForwardButton
-                        songs={this.state.songs}
+                        songs={this.props.songs}
                         shuffle={this.state.shuffle}
-                        songIndex={this.state.songIndex}
+                        songIndex={this.props.songIndex}
                         goForward={this.goForward}
                         disabled={this.props.search}
                     />
@@ -242,12 +259,13 @@ class AudioPlayer extends Component {
 }
 
 function mapDispatchToProps(dispatch) {
-    return {actions: bindActionCreators(Actions, dispatch), dispatch};
+    return { actions: bindActionCreators(Actions, dispatch), dispatch };
 }
 
 function mapStateToProps(store) {
     return {
-        songs: store.songs,
+        songs: store.songs.songs,
+        songIndex: store.songs.songIndex,
         searchResults: store.searchResults,
         progreses: store.progreses
     };
