@@ -26,29 +26,6 @@ import { autobind } from 'core-decorators';
 
     const songs = this.props.navigation.state.params.chapters.chapters;
 
-    // let songs = [{
-    //     title: "Al lail",
-    //     thumb: "http://www.assabile.com/media/person/200x256/mishary-rashid-alafasy.png",
-    //     artist: "Abdullaah Alee Jaabir",
-    //     songDuration: "17001",
-    //     path: "https://download.quranicaudio.com/quran/abdullaah_alee_jaabir_studio/092.mp3"
-    //   },
-    //   {
-    //     title: "Al dohah",
-    //     thumb: "http://www.assabile.com/media/person/200x256/mishary-rashid-alafasy.png",
-    //     artist: "Abdullaah Alee Jaabir",
-    //     songDuration: "14001",
-    //     path: "https://download.quranicaudio.com/quran/abdullaah_alee_jaabir_studio/093.mp3"
-    //   },
-    //   {
-    //     title: "Al sharh",
-    //     thumb: "http://www.assabile.com/media/person/200x256/mishary-rashid-alafasy.png",
-    //     artist: "Abdullaah Alee Jaabir",
-    //     songDuration: "12001",
-    //     path: "https://download.quranicaudio.com/quran/abdullaah_alee_jaabir_studio/094.mp3"
-    //   }
-    // ];
-
     this.state = {
       playing: true,
       muted: false,
