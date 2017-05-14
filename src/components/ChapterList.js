@@ -1,9 +1,10 @@
 import { Content, ListItem, Text } from 'native-base';
+import perpareReciterSurahsList from '../utils/perpareReciterSurahsList';
 
-export default ({ chapters, actions }) => {
+export default (props) => {
   const ListOfChapters = () => [
-    chapters.map(chapter =>
-      <ListItem key={chapter.id} onPress={() => console.warn(`TRIGGER PLAYER of${chapter.name.simple}`)}>
+    props.chapters.map(chapter =>
+      <ListItem key={chapter.id} onPress={() => props.actions.navigate('AudioPlayer', { chapters: perpareReciterSurahsList(props.reciter, props.chapters, chapter.id) })}>
         <Text>{chapter.name.simple}</Text>
       </ListItem>)
   ];
