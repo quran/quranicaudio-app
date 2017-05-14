@@ -1,9 +1,5 @@
 import { Component, PropTypes } from 'react';
-import {
-  TextInput,
-  StyleSheet,
-  View
-} from 'react-native';
+import { TextInput, StyleSheet, View, Text } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -17,7 +13,6 @@ import Loader from '../../components/common/Loader';
 
 import { Container, Item } from 'native-base';
 import Icon from 'react-native-vector-icons/EvilIcons';
-
 
 export class Home extends Component {
   static navigationOptions = {
@@ -55,12 +50,16 @@ export class Home extends Component {
           <Icon
             name="close"
             onPress={() => actions.clearSearch()}
-            size={20} style={style.searchClose}
+            size={20}
+            style={style.searchClose}
           />
         </Item>
         <View />
-        <ReciterList reciters={reciters} actions={{ navigate }} search={search} />
-        <AudioPlayer />
+        <ReciterList
+          reciters={reciters}
+          actions={{ navigate }}
+          search={search}
+        />
       </Container>
     );
   }
@@ -74,6 +73,7 @@ function mapStateToProps(state) {
   return {
     reciters: state.reciters.reciters,
     main: state.main,
+    audio: state.audio,
     search: state.search
   };
 }
@@ -108,6 +108,5 @@ const style = StyleSheet.create({
     alignItems: 'flex-end'
   }
 });
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

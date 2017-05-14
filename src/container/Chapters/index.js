@@ -61,8 +61,7 @@ export class Chapters extends Component {
           />
         </Item>
         <View />
-        <ChapterList chapters={chapters} reciter={reciter} actions={{ navigate }} search={search} />
-        <AudioPlayer />
+        <ChapterList chapters={chapters} reciter={reciter} actions={{ navigate, ...actions }} search={search} />
       </Container>
     );
   }
@@ -76,6 +75,7 @@ function mapStateToProps(state) {
   return {
     chapters: state.chapters.chapters,
     main: state.main,
+    audio: state.audio,
     search: state.search
   };
 }
