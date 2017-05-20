@@ -83,6 +83,7 @@ class AudioPlayer extends Component {
     setTime(params) {
         if (!this.state.sliding) {
             this.setState({currentTime: params.currentTime});
+            this.props.actions.setCurrentTime(params.currentTime);
         }
     }
 
@@ -110,10 +111,11 @@ class AudioPlayer extends Component {
     onSlidingChange(value) {
         const newPosition = value * this.state.songDuration;
         this.setState({currentTime: newPosition});
+        this.props.actions.setCurrentTime(newPosition);
     }
 
     onSlidingComplete() {
-        this.refs.audio.seek(this.state.currentTime); //eslint-disable-line
+        this.refs.audio.seek(this.props.currentTime); //eslint-disable-line
         this.setState({sliding: false});
     }
 
@@ -136,12 +138,12 @@ class AudioPlayer extends Component {
     }
 
     goBackward() {
-        if (this.state.currentTime < 3 && this.props.songIndex !== 0) {
+        if (this.props.currentTime < 3 && this.props.songIndex !== 0) {
             this.setState({
                 songIndex: this.props.songIndex - 1,
                 currentTime: 0
             });
-
+            this.props.actions.setCurrentTime(0);
             this.props.actions.setSelectedSongIndex(this.props.songIndex - 1);
 
         } else {
@@ -149,6 +151,7 @@ class AudioPlayer extends Component {
             this.setState({
                 currentTime: 0
             });
+            this.props.actions.setCurrentTime(0);
         }
     }
 
@@ -228,7 +231,7 @@ class AudioPlayer extends Component {
                     onValueChange={this.onSlidingChange}
                     value={songPercentage}
                     songDuration={this.state.songDuration}
-                    currentTime={this.state.currentTime}
+                    currentTime={this.props.currentTime}
                 />
                 <View style={Styles.controls}>
                     <ShuffleButton
@@ -267,7 +270,8 @@ function mapStateToProps(store) {
         songs: store.songs.songs,
         songIndex: store.songs.songIndex,
         searchResults: store.searchResults,
-        progreses: store.progreses
+        progreses: store.progreses,
+        currentTime: store.songs.currentTime
     };
 }
 
