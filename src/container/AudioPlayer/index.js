@@ -48,10 +48,12 @@ class AudioPlayer extends Component {
 
         MusicPlayer.onPlay(() => {
             this.setState({playing: true});
+            this.props.actions.setIsPlaying(true);
         });
 
         MusicPlayer.onPause(() => {
             this.setState({playing: false});
+            this.props.actions.setIsPlaying(false);
         });
 
         MusicPlayer.onForward(this.goForward);
@@ -102,6 +104,7 @@ class AudioPlayer extends Component {
 
     togglePlay() {
         this.setState({playing: !this.state.playing});
+        this.props.actions.setIsPlaying(!this.props.playing);
     }
 
     onSlidingStart() {
@@ -131,6 +134,7 @@ class AudioPlayer extends Component {
                 currentTime: 0,
                 playing: true
             });
+            this.props.actions.setIsPlaying(true);
             this.refs.audio.seek(0); //eslint-disable-line
 
             this.props.actions.setSelectedSongIndex(this.props.songIndex + 1);
@@ -158,6 +162,8 @@ class AudioPlayer extends Component {
     onEnd() {
         this.setState({playing: false});
         this.setState({playing: true});
+        this.props.actions.setIsPlaying(false);
+        this.props.actions.setIsPlaying(true);
     }
 
     renderVideoPlayer() {
@@ -271,7 +277,8 @@ function mapStateToProps(store) {
         songIndex: store.songs.songIndex,
         searchResults: store.searchResults,
         progreses: store.progreses,
-        currentTime: store.songs.currentTime
+        currentTime: store.songs.currentTime,
+        playing: store.songs.isPlaying
     };
 }
 

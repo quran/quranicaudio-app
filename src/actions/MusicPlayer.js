@@ -4,7 +4,8 @@ import {
     MUSIC_PLAYER_GO_BACKWARD,
     MUSIC_PLAYER_SET_SONGS_LIST,
     MUSIC_PLAYER_SET_SELECTED_SONG_INDEX,
-    MUSIC_PLAYER_SET_CURRENT_TIME
+    MUSIC_PLAYER_SET_CURRENT_TIME,
+    MUSIC_PLAYER_SET_IS_PLAYING
 } from './constants';
 
 const songs = songs => ({
@@ -22,9 +23,10 @@ const currentTime = currentTime => ({
     data: currentTime
 });
 
-export const setPlayingSong = () => {
-
-}
+const isPlaying = isPlaying => ({
+    type: MUSIC_PLAYER_SET_IS_PLAYING,
+    data: isPlaying
+});
 
 export const setSongsList = (songsList)=> {
     return (dispatch) => {
@@ -40,8 +42,13 @@ export const setSelectedSongIndex = (selectedSongIndex) => {
 }
 
 export const setCurrentTime = (updatedCurrentTime) => {
-    console.log("hereeee");
     return (dispatch) => {
         dispatch(currentTime(updatedCurrentTime));
+    }
+}
+
+export const setIsPlaying = (songIsPlaying) => {
+    return (dispatch) => {
+        dispatch(isPlaying(songIsPlaying))
     }
 }

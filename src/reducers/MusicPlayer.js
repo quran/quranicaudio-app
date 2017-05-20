@@ -1,7 +1,8 @@
 import {
     MUSIC_PLAYER_SET_SONGS_LIST,
     MUSIC_PLAYER_SET_SELECTED_SONG_INDEX,
-    MUSIC_PLAYER_SET_CURRENT_TIME
+    MUSIC_PLAYER_SET_CURRENT_TIME,
+    MUSIC_PLAYER_SET_IS_PLAYING
 } from '../actions/constants';
 
 export default function songs(state = { songs: [], status: 'none' }, action) {
@@ -12,8 +13,9 @@ export default function songs(state = { songs: [], status: 'none' }, action) {
         case MUSIC_PLAYER_SET_SELECTED_SONG_INDEX:
             return { ...state, songIndex: data };
         case MUSIC_PLAYER_SET_CURRENT_TIME:
-            console.log(data);
             return { ...state, currentTime: data };
+        case MUSIC_PLAYER_SET_IS_PLAYING:
+            return { ...state, isPlaying: data };
         default:
             return state;
     }
