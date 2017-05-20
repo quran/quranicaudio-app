@@ -11,9 +11,9 @@ export default function songs(state = { songs: [], status: 'none' }, action) {
         case MUSIC_PLAYER_SET_SONGS_LIST:
             return { songs: data, status: 'success' };
         case MUSIC_PLAYER_SET_SELECTED_SONG_INDEX:
-            return { ...state, songIndex: data };
+            return { ...state, songIndex: data, isPlaying: false };
         case MUSIC_PLAYER_SET_CURRENT_TIME:
-            return { ...state, currentTime: data };
+            return { ...state, currentTime: data, isPlaying: false };
         case MUSIC_PLAYER_SET_IS_PLAYING:
             return { ...state, isPlaying: data };
         default:
