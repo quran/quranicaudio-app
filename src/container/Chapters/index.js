@@ -1,7 +1,5 @@
 import { Component, PropTypes } from 'react';
 import {
-  TextInput,
-  StyleSheet,
   View
 } from 'react-native';
 
@@ -39,6 +37,7 @@ export class Chapters extends Component {
   render() {
     const { navigation, chapters, actions, search } = this.props;
     const { navigate } = navigation;
+
     const reciter = navigation.state.params.reciter;
 
     if (chapters.length < 1) return <Loader />;
