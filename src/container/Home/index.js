@@ -1,9 +1,9 @@
 import { Component, PropTypes } from 'react';
 import {
-  TextInput,
   StyleSheet,
   View
 } from 'react-native';
+
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -14,9 +14,9 @@ import { baseHeaderStyle } from '../../styles/variables';
 import AudioPlayer from '../../components/AudioPlayer';
 import ReciterList from '../../components/ReciterList';
 import Loader from '../../components/common/Loader';
+import Search from '../../components/common/Search';
 
-import { Container, Item } from 'native-base';
-import Icon from 'react-native-vector-icons/EvilIcons';
+import { Container } from 'native-base';
 
 
 export class Home extends Component {
@@ -43,21 +43,7 @@ export class Home extends Component {
 
     return (
       <Container>
-        <Item style={{ backgroundColor: 'white' }}>
-          <Icon name="search" size={30} style={style.searchIcon} />
-          <TextInput
-            style={style.search}
-            placeholder="Search…"
-            keyboardType="web-search"
-            onChangeText={text => actions.search(text)}
-            value={search.value}
-          />
-          <Icon
-            name="close"
-            onPress={() => actions.clearSearch()}
-            size={20} style={style.searchClose}
-          />
-        </Item>
+        <Search actions={actions} data={search} />
         <View />
         <ReciterList reciters={reciters} actions={{ navigate }} search={search} />
         <AudioPlayer />

@@ -1,8 +1,12 @@
-import {
-  View
-} from 'react-native';
+import styled from 'styled-components/native';
+
 import {
   Spinner
 } from 'native-base';
 
-export default ({ color = '#13a5ae' }) => <View style={{ flex: 1, justifyContent: 'center' }}><Spinner color={color} /></View>;
+const View = styled.View`
+  flex: 1;
+  justifyContent: center;
+`;
+
+export default ({ color = '#13a5ae' }) => <View><Spinner color={color} /></View>;
