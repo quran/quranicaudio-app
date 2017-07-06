@@ -4,10 +4,24 @@ import perpareReciterSurahsList from '../utils/perpareReciterSurahsList';
 export default (props) => {
   const ListOfChapters = () => [
     props.chapters.map(chapter =>
-      <ListItem key={chapter.id} onPress={() => props.actions.navigate('AudioPlayer', { chapters: perpareReciterSurahsList(props.reciter, props.chapters, chapter.id) })}>
-        <Text>{chapter.name.simple}</Text>
-      </ListItem>)
+      <ListItem
+        key={chapter.id}
+        onPress={() =>
+          props.actions.selectChapter({
+            reciter: props.reciter,
+            chapter: chapter.id
+          })}
+      >
+        <Text>
+          {chapter.name.simple}
+        </Text>
+      </ListItem>
+    )
   ];
 
-  return (<Content>{ListOfChapters()}</Content>);
+  return (
+    <Content>
+      {ListOfChapters()}
+    </Content>
+  );
 };

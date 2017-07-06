@@ -1,5 +1,5 @@
 export { getReciters } from './reciter';
-export { getChapters } from './chapters';
+export { getChapters, selectChapter } from './chapters';
 export { search, clearSearch } from './search';
 export { setSongsList, setSelectedSongIndex } from './MusicPlayer';
 export const addMessage = data => ({

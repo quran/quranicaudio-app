@@ -26,7 +26,7 @@ class AudioPlayer extends Component {
   constructor(props) {
     super(props);
 
-    const songs = this.props.navigation.state.params.chapters.chapters;
+    const songs = props.chapters.chapters;
 
     this.state = {
       playing: true,
@@ -34,8 +34,7 @@ class AudioPlayer extends Component {
       shuffle: false,
       sliding: false,
       currentTime: 0,
-      songIndex:
-        this.props.navigation.state.params.chapters.selected_chapter - 1,
+      songIndex: props.chapters.selected_chapter - 1,
       songs
     };
   }
@@ -60,6 +59,12 @@ class AudioPlayer extends Component {
     this.props.actions.setSelectedSongIndex(this.state.songIndex);
   }
 
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      songIndex: nextProps.chapters.selected_chapter - 1
+    });
+  }
+
   // eslint-disable-next-line
   onLoad(params) {
     this.setState({ songDuration: params.duration });
@@ -67,7 +72,7 @@ class AudioPlayer extends Component {
   }
 
   setPlayingSong() {
-    const song = this.props.songs[this.props.songIndex];
+    const song = this.state.songs[this.state.songIndex];
 
     MusicPlayer.setNowPlaying({
       title: song.title,
@@ -84,7 +89,7 @@ class AudioPlayer extends Component {
   }
 
   randomSongIndex() {
-    const maxIndex = this.props.songs.length - 1;
+    const maxIndex = this.state.songs.length - 1;
     return Math.floor(Math.random() * (maxIndex - 0 + 1)) + 0; //eslint-disable-line
   }
 
@@ -117,7 +122,7 @@ class AudioPlayer extends Component {
   goForward() {
     if (
       this.state.shuffle ||
-      this.props.songIndex + 1 !== this.props.songs.length
+      this.state.songIndex + 1 !== this.state.songs.length
     ) {
       this.setState({
         songIndex: this.props.shuffle
@@ -128,18 +133,18 @@ class AudioPlayer extends Component {
       });
       this.refs.audio.seek(0); //eslint-disable-line
 
-      this.props.actions.setSelectedSongIndex(this.props.songIndex + 1);
+      this.props.actions.setSelectedSongIndex(this.state.songIndex + 1);
     }
   }
 
   goBackward() {
-    if (this.state.currentTime < 3 && this.props.songIndex !== 0) {
+    if (this.state.currentTime < 3 && this.state.songIndex !== 0) {
       this.setState({
-        songIndex: this.props.songIndex - 1,
+        songIndex: this.state.songIndex - 1,
         currentTime: 0
       });
 
-      this.props.actions.setSelectedSongIndex(this.props.songIndex - 1);
+      this.props.actions.setSelectedSongIndex(this.state.songIndex - 1);
     } else {
       this.refs.audio.seek(0); //eslint-disable-line
       this.setState({
@@ -154,15 +159,16 @@ class AudioPlayer extends Component {
   }
 
   renderVideoPlayer() {
-    if (this.props.songs[this.props.songIndex]) {
+    if (this.state.songs[this.state.songIndex]) {
       return (
         <Video
-          source={{ uri: this.props.songs[this.props.songIndex].path }}
+          source={{ uri: this.state.songs[this.state.songIndex].path }}
           volume={this.state.muted ? 0 : 1.0}
           muted={false}
           ref="audio"
           paused={!this.state.playing}
           playInBackground
+          playWhenInactive
           onLoad={this.onLoad}
           onProgress={this.setTime}
           onEnd={this.onEnd}
@@ -175,11 +181,11 @@ class AudioPlayer extends Component {
   }
 
   renderProgressBar() {
-    if (this.props.searchedSongs) {
-      const song = this.props.songs[this.props.songIndex];
+    if (this.state.searchedSongs) {
+      const song = this.state.songs[this.state.songIndex];
       return (
         <Progress.Bar
-          progress={this.props.progreses[song.id]}
+          progress={this.state.progreses[song.id]}
           width={width}
           color="#fff"
           borderColor="transparent"
@@ -190,7 +196,7 @@ class AudioPlayer extends Component {
   }
 
   render() {
-    if (this.props.songs < 1) {
+    if (this.state.songs < 1) {
       return <Loader />;
     }
 
@@ -205,18 +211,12 @@ class AudioPlayer extends Component {
         {this.renderVideoPlayer()}
 
         {this.renderProgressBar()}
-        <Image
-          style={Styles.songImage}
-          source={{
-            uri:
-              (Platform.OS === 'android' ? 'file://' : '') +
-              this.props.songs[this.props.songIndex].thumb
-          }}
-        />
-
         {this.renderProgressBar()}
         <Text style={Styles.songTitle}>
-          {this.props.songs[this.props.songIndex].title}
+          {this.state.songs[this.state.songIndex].title}
+        </Text>
+        <Text style={Styles.songTitle}>
+          {this.props.chapters.reciter}
         </Text>
         <SongSlider
           onSlidingStart={this.onSlidingStart}

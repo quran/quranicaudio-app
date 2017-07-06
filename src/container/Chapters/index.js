@@ -1,7 +1,5 @@
 import { Component, PropTypes } from 'react';
-import {
-  View
-} from 'react-native';
+import { View } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -13,7 +11,6 @@ import AudioPlayer from '../../components/AudioPlayer';
 import ChapterList from '../../components/ChapterList';
 import Loader from '../../components/common/Loader';
 import Search from '../../components/common/Search';
-
 
 import { Container } from 'native-base';
 
@@ -46,8 +43,12 @@ export class Chapters extends Component {
       <Container>
         <Search actions={actions} data={search} />
         <View />
-        <ChapterList chapters={chapters} reciter={reciter} actions={{ navigate }} search={search} />
-        <AudioPlayer />
+        <ChapterList
+          chapters={chapters}
+          reciter={reciter}
+          actions={{ ...actions, navigate }}
+          search={search}
+        />
       </Container>
     );
   }

@@ -22,6 +22,7 @@ export default (reciter, chapters, chapterId) => {
 
   return {
     chapters: reciterChapters,
-    selected_chapter: chapterId
+    selected_chapter: chapterId,
+    reciter: reciter.name
   };
 };

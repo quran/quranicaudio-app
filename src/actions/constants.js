@@ -11,6 +11,7 @@ export const SEARCH_CLEAR = 'SEARCH_CLEAR';
 // chapter
 export const FETCH_CHAPTERS = 'FETCH_CHAPTERS';
 export const FETCH_CHAPTERS_FAIL = 'FETCH_CHAPTERS_FAIL';
+export const SELECT_CHAPTER_TO_PLAY = 'SELECT_CHAPTER_TO_PLAY';
 
 // Music player
 export const MUSIC_PLAYER_PLAY_SONG = 'MUSIC_PLAYER_PLAY_SONG';

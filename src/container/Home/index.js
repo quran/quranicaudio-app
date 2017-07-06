@@ -42,11 +42,9 @@ export class Home extends Component {
     if (reciters.length < 1) return <Loader />;
 
     return (
-      <Container>
+      <Container style={{ height: 100 }}>
         <Search actions={actions} data={search} />
-        <View />
-        <ReciterList reciters={reciters} actions={{ navigate }} search={search} />
-        <AudioPlayer />
+        <ReciterList reciters={reciters} actions={{ ...actions, navigate }} search={search} />
       </Container>
     );
   }

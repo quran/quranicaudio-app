@@ -1,7 +1,12 @@
-import { FETCH_CHAPTERS } from './constants';
+import { FETCH_CHAPTERS, SELECT_CHAPTER_TO_PLAY } from './constants';
 
 export const chapters = data => ({
   type: FETCH_CHAPTERS,
+  data
+});
+
+export const selectChapter = data => ({
+  type: SELECT_CHAPTER_TO_PLAY,
   data
 });
 
