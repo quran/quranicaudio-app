@@ -1,5 +1,4 @@
 import { Component, PropTypes } from 'react';
-import { View } from 'react-native';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -7,7 +6,6 @@ import * as Actions from '../../actions/index';
 import { baseHeaderStyle } from '../../styles/variables';
 
 // components
-import AudioPlayer from '../../components/AudioPlayer';
 import ChapterList from '../../components/ChapterList';
 import Loader from '../../components/common/Loader';
 import Search from '../../components/common/Search';
@@ -32,20 +30,19 @@ export class Chapters extends Component {
   }
 
   render() {
-    const { navigation, chapters, actions, search } = this.props;
+    const { navigation, chapters, actions, search, songs } = this.props;
     const { navigate } = navigation;
 
     const reciter = navigation.state.params.reciter;
-
     if (chapters.length < 1) return <Loader />;
 
     return (
       <Container>
         <Search actions={actions} data={search} />
-        <View />
         <ChapterList
           chapters={chapters}
           reciter={reciter}
+          songs={songs}
           actions={{ ...actions, navigate }}
           search={search}
         />
@@ -62,7 +59,7 @@ function mapStateToProps(state) {
   return {
     chapters: state.chapters.chapters,
     main: state.main,
-    search: state.search
+    search: state.search,
   };
 }
 

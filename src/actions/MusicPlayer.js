@@ -3,7 +3,8 @@ import {
   MUSIC_PLAYER_GO_FORWARD,
   MUSIC_PLAYER_GO_BACKWARD,
   MUSIC_PLAYER_SET_SONGS_LIST,
-  MUSIC_PLAYER_SET_SELECTED_SONG_INDEX
+  MUSIC_PLAYER_SET_SELECTED_SONG_INDEX,
+  MUSIC_PLAYER_MINIMISE
 } from './constants';
 
 const songs = songs => ({
@@ -25,3 +26,7 @@ export const setSongsList = songsList => (dispatch) => {
 export const setSelectedSongIndex = selectedSongIndex => (dispatch) => {
   dispatch(songIndex(selectedSongIndex));
 };
+
+export const minimisePlayer = () => ({
+  type: MUSIC_PLAYER_MINIMISE
+});

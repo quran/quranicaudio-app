@@ -5,21 +5,20 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Styles from '../styles';
 import Slider from 'react-native-slider';
 import * as Utils from '../utils/audio';
+import styled from 'styled-components/native';
 
-export const PlayButton = props => <Icon
-  onPress={props.togglePlay}
-  style={Styles.play}
-  name={props.playing ? 'ios-pause' : 'ios-play'}
-  size={70}
-  color="#fff"
-/>;
+export const PlayButton = props =>
+  <Icon
+    onPress={props.togglePlay}
+    style={Styles.play}
+    name={props.playing ? 'ios-pause' : 'ios-play'}
+    size={70}
+    color="#fff"
+  />;
 
 export const ForwardButton = (props) => {
   let forwardButton = null;
-  if (
-      !props.shuffle &&
-      props.songIndex + 1 === props.songs.length
-    ) {
+  if (!props.shuffle && props.songIndex + 1 === props.songs.length) {
     forwardButton = (
       <FontAwesome
         style={Styles.forward}
@@ -27,7 +26,7 @@ export const ForwardButton = (props) => {
         size={25}
         color="#333"
       />
-      );
+    );
   } else {
     forwardButton = (
       <FontAwesome
@@ -37,89 +36,66 @@ export const ForwardButton = (props) => {
         size={25}
         color="#fff"
       />
-      );
+    );
   }
 
   return forwardButton;
 };
 
-
-export const BackwardButton = props => (
+export const BackwardButton = props =>
   <FontAwesome
     onPress={props.goBackward}
     style={Styles.back}
     name="backward"
     size={25}
     color="#fff"
-  />
-    );
+  />;
 
-export const VolumeButton = props => (
+export const VolumeButton = props =>
   <FontAwesome
     onPress={props.toggleVolume}
     style={Styles.volume}
     name={props.muted ? 'volume-off' : 'volume-up'}
     size={18}
     color="#fff"
-  />
-    );
+  />;
 
-export const ShuffleButton = props => (
-  <FontAwesome
+const ShuffleIcon = styled(FontAwesome)`
+  margin-top: 26px;
+  `;
+
+export const ShuffleButton = props =>
+  <ShuffleIcon
     onPress={props.toggleShuffle}
-    style={Styles.shuffle}
     name="random"
     size={18}
     color={props.shuffle ? '#f62976' : '#fff'}
-  />
-    );
+  />;
 
-export const DownloadButton = (props) => {
-  if (!props.download || props.downloading) {
-    return (
-      <FontAwesome
-        style={Styles.downloadButton}
-        name="download"
-        size={25}
-        color="#333"
-      />
-    );
-  }
+export const SongSlider = (props) => {
+  const currentTime = Utils.secondTime(props.currentTime) || Utils.constants.defaultTime;
+  const durationTime = Utils.secondTime(props.songDuration) || Utils.constants.defaultTime;
   return (
-    <FontAwesome
-      onPress={props.downloadMusic}
-      style={Styles.downloadButton}
-      name="download"
-      size={25}
-      color="#fff"
-    />
-  );
+    <View style={Styles.sliderContainer}>
+      <Slider
+        onSlidingStart={props.handleSlidingStart}
+        onSlidingComplete={props.handleSlidingComplete}
+        onValueChange={props.onChange}
+        minimumTrackTintColor="#2CA4AB"
+        style={Styles.slider}
+        trackStyle={Styles.sliderTrack}
+        thumbStyle={Styles.sliderThumb}
+        value={props.value}
+      />
+
+      <View style={Styles.timeInfo}>
+        <Text style={Styles.time}>
+          {currentTime}
+        </Text>
+        <Text style={Styles.timeRight}>
+          {durationTime}
+        </Text>
+      </View>
+    </View>);
 };
 
-export const SongSlider = props => (
-  <View style={Styles.sliderContainer}>
-    <Slider
-      onSlidingStart={props.onSlidingStart}
-      onSlidingComplete={props.onSlidingComplete}
-      onValueChange={props.onValueChange}
-      minimumTrackTintColor="#fff"
-      style={Styles.slider}
-      trackStyle={Styles.sliderTrack}
-      thumbStyle={Styles.sliderThumb}
-      value={props.value}
-    />
-
-    <View style={Styles.timeInfo}>
-      <Text style={Styles.time}>
-        {Utils.formattedTime(props.currentTime)}
-      </Text>
-      <Text style={Styles.timeRight}>
-            -
-            {' '}
-        {Utils.formattedTime(
-              props.songDuration - props.currentTime
-            )}
-      </Text>
-    </View>
-  </View>
-    );

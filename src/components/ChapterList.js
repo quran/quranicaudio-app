@@ -1,5 +1,4 @@
 import { Content, ListItem, Text } from 'native-base';
-import perpareReciterSurahsList from '../utils/perpareReciterSurahsList';
 
 export default (props) => {
   const ListOfChapters = () => [

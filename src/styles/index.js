@@ -3,14 +3,6 @@ import { StyleSheet, Dimensions } from 'react-native';
 const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
-  homeContainer: {
-    flex: 1,
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    flexDirection: 'column',
-    paddingTop: 10,
-    paddingHorizontal: 5
-  },
   searchInput: {
     height: 20,
     width: width - 150,
@@ -18,13 +10,14 @@ const styles = StyleSheet.create({
     borderBottomColor: '#000'
   },
   container: {
-    flex: 1,
     alignItems: 'center',
     backgroundColor: '#000',
+    flex: 1,
+
   },
   header: {
-    marginTop: 17,
-    marginBottom: 17,
+    marginTop: 0,
+    marginBottom: 0,
     width,
   },
   headerClose: {
@@ -36,21 +29,14 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
     paddingRight: 20,
   },
-  downloadButton: {
-    position: 'absolute',
-    top: 10,
-    left: width - 40,
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingRight: 20,
-  },
+
   headerText: {
     color: '#FFF',
     fontSize: 18,
     textAlign: 'center',
   },
   songImage: {
-    marginBottom: 20,
+    marginBottom: 0,
     width: width - 30,
     height: 300
   },
@@ -58,18 +44,17 @@ const styles = StyleSheet.create({
     color: 'white',
     fontFamily: 'Helvetica Neue',
     marginBottom: 10,
-    marginTop: 13,
+    marginTop: -20,
     fontSize: 19
   },
   albumTitle: {
     color: '#BBB',
     fontFamily: 'Helvetica Neue',
-    fontSize: 14,
-    marginBottom: 20,
+    fontSize: 16,
+    marginBottom: 10,
   },
   controls: {
     flexDirection: 'row',
-    marginTop: 30,
   },
   back: {
     marginTop: 22,
@@ -98,26 +83,32 @@ const styles = StyleSheet.create({
   time: {
     color: '#FFF',
     flex: 1,
-    fontSize: 10,
+    paddingTop: 2,
+    fontSize: 14,
   },
   timeRight: {
     color: '#FFF',
     textAlign: 'right',
     flex: 1,
-    fontSize: 10,
+    paddingTop: 2,
+    fontSize: 14,
   },
   slider: {
     height: 20,
   },
   sliderTrack: {
-    height: 2,
+    height: 10,
     backgroundColor: '#333',
   },
   sliderThumb: {
-    width: 10,
-    height: 10,
+    width: 15,
+    height: 15,
     backgroundColor: '#fff',
-    borderRadius: 10 / 2
+    borderColor: '#30a935',
+    borderRadius: 15 / 2,
+    shadowRadius: 2,
+    shadowOpacity: 0.35,
+    top: 15
   },
   songContainer: {
     width,
@@ -163,11 +154,6 @@ const styles = StyleSheet.create({
   searchInputContainer: {
     width,
     height: 60
-  },
-  downloadButtonContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
   }
 });
 

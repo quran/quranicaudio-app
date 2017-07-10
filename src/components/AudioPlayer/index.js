@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, Text, View, Dimensions, Platform } from 'react-native';
+import { Text, View, Dimensions } from 'react-native';
 import * as Actions from '../../actions/index';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -12,14 +12,12 @@ import {
   PlayButton,
   ShuffleButton,
   VolumeButton,
-  DownloadButton, //eslint-disable-line
   SongSlider
 } from '../../components/PlayerButtons';
 import MusicPlayer from '../../utils/MusicPlayer';
 import * as Progress from "react-native-progress"; //eslint-disable-line
 const { width } = Dimensions.get('window');
 import { autobind } from 'core-decorators';
-import Loader from '../../components/common/Loader';
 
 @autobind
 class AudioPlayer extends Component {
@@ -105,16 +103,16 @@ class AudioPlayer extends Component {
     this.setState({ playing: !this.state.playing });
   }
 
-  onSlidingStart() {
+  handleSlidingStart() {
     this.setState({ sliding: true });
   }
 
-  onSlidingChange(value) {
+  handleSlidingChange(value) {
     const newPosition = value * this.state.songDuration;
     this.setState({ currentTime: newPosition });
   }
 
-  onSlidingComplete() {
+  handleSlidingComplete() {
     this.refs.audio.seek(this.state.currentTime); //eslint-disable-line
     this.setState({ sliding: false });
   }
@@ -196,36 +194,29 @@ class AudioPlayer extends Component {
   }
 
   render() {
-    if (this.state.songs < 1) {
-      return <Loader />;
-    }
-
     let songPercentage;
     if (this.state.songDuration !== undefined) {
       songPercentage = this.state.currentTime / this.state.songDuration;
     } else {
       songPercentage = 0;
     }
+
+    const title =
+      this.state.songs &&
+      this.state.songs[this.state.songIndex] &&
+      this.state.songs[this.state.songIndex].title;
+
     return (
       <View style={Styles.container}>
         {this.renderVideoPlayer()}
-
-        {this.renderProgressBar()}
         {this.renderProgressBar()}
         <Text style={Styles.songTitle}>
-          {this.state.songs[this.state.songIndex].title}
+          {title}
         </Text>
-        <Text style={Styles.songTitle}>
+        <Text style={Styles.albumTitle}>
           {this.props.chapters.reciter}
         </Text>
-        <SongSlider
-          onSlidingStart={this.onSlidingStart}
-          onSlidingComplete={this.onSlidingComplete}
-          onValueChange={this.onSlidingChange}
-          value={songPercentage}
-          songDuration={this.state.songDuration}
-          currentTime={this.state.currentTime}
-        />
+
         <View style={Styles.controls}>
           <ShuffleButton
             shuffle={this.state.shuffle}
@@ -249,6 +240,14 @@ class AudioPlayer extends Component {
             toggleVolume={this.toggleVolume}
           />
         </View>
+        <SongSlider
+          handleSlidingStart={this.handleSlidingStart}
+          handleSlidingComplete={this.handleSlidingComplete}
+          onChange={this.handleSlidingChange}
+          value={songPercentage}
+          songDuration={this.state.songDuration}
+          currentTime={this.state.currentTime}
+        />
       </View>
     );
   }
