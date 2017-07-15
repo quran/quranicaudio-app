@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Dimensions } from 'react-native';
 import * as Actions from '../../actions/index';
 import { connect } from 'react-redux';
+import styled from 'styled-components/native';
 import { bindActionCreators } from 'redux';
 import Video from 'react-native-video';
 import Styles from '../../styles';
@@ -205,9 +206,15 @@ class AudioPlayer extends Component {
       this.state.songs &&
       this.state.songs[this.state.songIndex] &&
       this.state.songs[this.state.songIndex].title;
-
+    const minimised = this.props.minimise;
     return (
       <View style={Styles.container}>
+        {minimised &&
+        <PlayButton
+          togglePlay={this.togglePlay}
+          playing={this.state.playing}
+          minimised={minimised}
+        />}
         {this.renderVideoPlayer()}
         {this.renderProgressBar()}
         <Text style={Styles.songTitle}>

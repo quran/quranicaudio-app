@@ -49,6 +49,7 @@ class AudioPlayerContainer extends React.Component {
             />
           </ViewCloseIcon>
           <AudioPlayer
+            minimise={player.minimise}
             chapters={perpareReciterSurahsList(
               selection.reciter,
               chapters.chapters,

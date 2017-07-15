@@ -13,7 +13,7 @@ import { Container } from 'native-base';
 
 export class Home extends Component {
   static navigationOptions = {
-    title: 'QuranicAudio App',
+    title: 'QuranicAudio',
     header: ({ state, setParams }, defaultHeader) => ({
       ...defaultHeader,
       ...baseHeaderStyle

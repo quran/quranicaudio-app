@@ -14,10 +14,11 @@
   "dependencies": {
     "babel-plugin-transform-decorators-legacy": "^1.3.4",
     "babel-preset-es2015": "6.24.0",
-    "core-decorators": "^0.18.0",
-    "native-base": "2.0.13",
-    "react": "15.4.1",
-    "react-native": "0.42.2",
+    "core-decorators": "0.19.0",
+    "native-base": "2.2.1",
+    "quran-components": "^0.0.78",
+    "react": "16.0.0-alpha.12",
+    "react-native": "0.46.0",
     "react-native-button": "^1.7.1",
     "react-native-elements": "0.10.0",
     "react-native-music-control": "^0.3.2",
@@ -25,8 +26,9 @@
     "react-native-slider": "^0.9.1",
     "react-native-vector-icons": "4.0.0",
     "react-native-video": "^1.0.0",
-    "react-navigation": "1.0.0-beta.7",
+    "react-navigation": "git+https://github.com/react-community/react-navigation.git#7edd9a7",
     "react-redux": "5.0.3",
+    "react-test-renderer": "16.0.0-alpha.12",
     "redux": "3.6.0",
     "redux-thunk": "2.2.0",
     "styled-components": "^2.1.1",
@@ -36,7 +38,7 @@
     "babel-eslint": "7.1.1",
     "babel-jest": "19.0.0",
     "babel-plugin-react-require": "3.0.0",
-    "babel-preset-react-native": "1.9.1",
+    "babel-preset-react-native": "2.1.0",
     "eslint": "3.17.1",
     "eslint-config-airbnb": "14.1.0",
     "eslint-plugin-import": "2.2.0",
@@ -45,8 +47,7 @@
     "jest": "19.0.2",
     "lint-staged": "^3.4.1",
     "precommit": "^1.2.2",
-    "prettier": "^1.5.2",
-    "react-test-renderer": "15.4.1"
+    "prettier": "^1.5.2"
   },
   "jest": {
     "preset": "react-native"

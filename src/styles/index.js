@@ -60,10 +60,7 @@ const styles = StyleSheet.create({
     marginTop: 22,
     marginLeft: 45,
   },
-  play: {
-    marginLeft: 50,
-    marginRight: 50,
-  },
+
   forward: {
     marginTop: 22,
     marginRight: 45,

@@ -5,15 +5,28 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Styles from '../styles';
 import Slider from 'react-native-slider';
 import * as Utils from '../utils/audio';
-import styled from 'styled-components/native';
+import styled, { css } from 'styled-components/native';
 
-export const PlayButton = props =>
-  <Icon
-    onPress={props.togglePlay}
+const minimisedStyle = css`
+  position: absolute;
+  left: 20px;
+  top: -24px;
+  margin: 0;
+`;
+
+const PlayPauseIcon = styled(Icon)`
+  marginLeft: 50px;
+  marginRight: 50px;
+  ${props => props.minimised && minimisedStyle}
+`;
+export const PlayButton = ({ minimised, playing, togglePlay, }) =>
+  <PlayPauseIcon
+    onPress={togglePlay}
     style={Styles.play}
-    name={props.playing ? 'ios-pause' : 'ios-play'}
-    size={70}
-    color="#fff"
+    name={playing ? 'ios-pause' : 'ios-play'}
+    size={minimised ? 30 : 70}
+    minimised={minimised}
+    color={(!playing && minimised) ? '#2ca4ab' : '#fff'}
   />;
 
 export const ForwardButton = (props) => {
@@ -73,8 +86,10 @@ export const ShuffleButton = props =>
   />;
 
 export const SongSlider = (props) => {
-  const currentTime = Utils.secondTime(props.currentTime) || Utils.constants.defaultTime;
-  const durationTime = Utils.secondTime(props.songDuration) || Utils.constants.defaultTime;
+  const currentTime =
+    Utils.secondTime(props.currentTime) || Utils.constants.defaultTime;
+  const durationTime =
+    Utils.secondTime(props.songDuration) || Utils.constants.defaultTime;
   return (
     <View style={Styles.sliderContainer}>
       <Slider
@@ -96,6 +111,6 @@ export const SongSlider = (props) => {
           {durationTime}
         </Text>
       </View>
-    </View>);
+    </View>
+  );
 };
-
