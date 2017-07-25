@@ -5,6 +5,7 @@ import reciters from './reciters';
 import chapters from './chapters';
 import search from './search';
 import player from './MusicPlayer';
+import files from './files';
 
 export default AppNavigator => combineReducers({
   main,
@@ -13,5 +14,6 @@ export default AppNavigator => combineReducers({
   search,
   songs: player,
   player,
+  files,
   navigation: navigation(AppNavigator)
 });

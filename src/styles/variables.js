@@ -11,4 +11,7 @@ export const baseHeaderStyle = {
     },
   },
   titleStyle: { color: 'white' },
+  backTitleStyle: {
+    color: 'white'
+  }
 };

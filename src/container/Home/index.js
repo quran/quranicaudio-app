@@ -32,11 +32,15 @@ export class Home extends Component {
     const { navigation, reciters, actions, search } = this.props;
     const { navigate } = navigation;
     if (reciters.length < 1) return <Loader />;
+    const filtered =
+      search && search.value.length > 0
+        ? reciters.filter(item => item.name.toLowerCase().match(search.value.toLowerCase()))
+        : reciters;
 
     return (
       <Container style={{ height: 100 }}>
         <Search actions={actions} data={search} />
-        <ReciterList reciters={reciters} actions={{ ...actions, navigate }} search={search} />
+        <ReciterList reciters={filtered} actions={{ ...actions, navigate }} search={search} />
       </Container>
     );
   }

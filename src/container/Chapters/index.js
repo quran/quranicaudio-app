@@ -1,23 +1,23 @@
-import { Component, PropTypes } from 'react';
+import { Component, PropTypes } from "react";
 
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as Actions from '../../actions/index';
-import { baseHeaderStyle } from '../../styles/variables';
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../../actions/index";
+import { baseHeaderStyle } from "../../styles/variables";
 
 // components
-import ChapterList from '../../components/ChapterList';
-import Loader from '../../components/common/Loader';
-import Search from '../../components/common/Search';
+import ChapterList from "../../components/ChapterList";
+import Loader from "../../components/common/Loader";
+import Search from "../../components/common/Search";
 
-import { Container } from 'native-base';
+import { Container } from "native-base";
 
 export class Chapters extends Component {
   static navigationOptions = {
     title: ({ state }) => state.params.reciter.name,
     header: ({ state, setParams }, defaultHeader) => ({
       ...defaultHeader,
-      ...baseHeaderStyle
+      ...baseHeaderStyle,
     })
   };
 
@@ -26,23 +26,34 @@ export class Chapters extends Component {
   };
 
   componentDidMount() {
-    this.props.actions.getChapters();
+    const { actions, navigation } = this.props;
+
+    const { navigate } = navigation;
+    const reciter = navigation.state.params.reciter;
+    actions.getChapters();
+    actions.loadFilesForReciter(reciter.id);
   }
 
   render() {
-    const { navigation, chapters, actions, search, songs } = this.props;
+    const { navigation, chapters, actions, search, files } = this.props;
     const { navigate } = navigation;
 
-    const reciter = navigation.state.params.reciter;
-    if (chapters.length < 1) return <Loader />;
+    const filtered =
+      search && search.value.length > 0
+        ? chapters.filter(item =>
+            item.name.simple.toLowerCase().match(search.value.toLowerCase())
+          )
+        : chapters;
 
+    const reciter = navigation.state.params.reciter;
+    if (chapters.length < 1 || files.length < 1) return <Loader />;
     return (
       <Container>
         <Search actions={actions} data={search} />
         <ChapterList
-          chapters={chapters}
+          chapters={filtered}
+          files={files}
           reciter={reciter}
-          songs={songs}
           actions={{ ...actions, navigate }}
           search={search}
         />
@@ -58,8 +69,8 @@ Chapters.propTypes = {
 function mapStateToProps(state) {
   return {
     chapters: state.chapters.chapters,
-    main: state.main,
-    search: state.search,
+    files: state.files.files,
+    search: state.search
   };
 }
 
