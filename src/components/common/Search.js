@@ -7,6 +7,11 @@ const View = styled.View`
   minHeight: 60px;
 `;
 
+const Border = styled.View`
+  border: 0.5px solid #bdbdbd;
+  border-right-width: 0;
+`;
+
 const SearchIcon = styled(Icon)`
   backgroundColor: transparent;
   position: absolute;
@@ -48,6 +53,7 @@ function Search({ actions, data }) {
           size={20}
         />
       </If>
+      <Border />
     </View>
   );
 }

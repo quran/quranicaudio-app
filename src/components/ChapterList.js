@@ -54,6 +54,10 @@ export default props => {
           : "00:00";
       return (
         <ListItem
+        style={{
+
+          marginRight: 10
+        }}
           key={chapter.id}
           onPress={() =>
             props.actions.selectChapter({
@@ -81,7 +85,11 @@ export default props => {
   ];
 
   return (
-    <Content>
+    <Content
+      style={{
+        backgroundColor: 'white'
+      }}
+    >
       {ListOfChapters()}
     </Content>
   );
