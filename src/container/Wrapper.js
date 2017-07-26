@@ -10,7 +10,7 @@ import AudioPlayer from '../components/AudioPlayer';
 
 export class Wrapper extends Component {
   static navigationOptions = {
-    title: 'QuranicAudio App',
+    title: 'Quranic Audio',
     header: ({ state, setParams }, defaultHeader) => ({
       ...defaultHeader
     })

@@ -5,4 +5,4 @@ import {
 
 import Root from './src/index';
 
-AppRegistry.registerComponent('quranicaudioapp', () => Root);
+AppRegistry.registerComponent('quranicaudio', () => Root);

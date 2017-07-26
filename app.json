@@ -1,12 +1,12 @@
 {
-  "name": "quranicaudioapp",
-  "displayName": "quranicaudioapp",
+  "name": "quranicaudio",
+  "displayName": "Quranic Audio",
   "expo": {
     "name": "Quranic Audio",
     "version": "1.0.0",
     "orientation": "portrait",
     "primaryColor": "#cccccc",
-    "slug": "quranicaudioapp",
+    "slug": "quranicaudio",
     "sdkVersion": "18.0.0",
     "privacy": "unlisted"
   }
