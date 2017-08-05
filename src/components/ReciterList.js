@@ -1,4 +1,4 @@
-import { Content, ListItem, Text } from "native-base";
+import { Content, ListItem } from "native-base";
 import formatRecitersByLetter from "../utils/sortNames";
 import styled from "styled-components/native";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -12,7 +12,12 @@ const NoneFound = styled.Text`
 `;
 
 const Icon = styled(FontAwesome)`
-  color: #009faa;
+  color: #FFF;
+`;
+
+const Text = styled.Text`
+  color: ${props => props.divider ? 'white': 'black'};
+  font-size: 16px;
 `;
 
 export default ({ reciters, actions }) => {
@@ -27,13 +32,11 @@ export default ({ reciters, actions }) => {
   const ListOfReciters = () =>
     formatRecitersByLetter(reciters).map(({ letter, reciters }) => {
       if (reciters.length < 1) return false;
-      return [
-        <ListItem itemDivider>
-          <Text>
+      return [<ListItem itemDivider style={{ backgroundColor: "#161616" }}>
+          <Text divider>
             {letter}
           </Text>
-        </ListItem>,
-        reciters.map(reciter =>
+        </ListItem>, reciters.map(reciter =>
           <ListItem
             style={{
               marginRight: 10
@@ -44,8 +47,7 @@ export default ({ reciters, actions }) => {
               {reciter.name}
             </Text>
           </ListItem>
-        )
-      ];
+        )];
     });
 
   return (
