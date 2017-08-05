@@ -3,7 +3,7 @@
    LastUpgradeVersion = "0620"
    version = "1.3">
    <BuildAction
-      parallelizeBuildables = "YES"
+      parallelizeBuildables = "NO"
       buildImplicitDependencies = "YES">
       <BuildActionEntries>
          <BuildActionEntry
@@ -29,23 +29,23 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "quranicaudioapp.app"
-               BlueprintName = "quranicaudioapp"
-               ReferencedContainer = "container:quranicaudioapp.xcodeproj">
+               BuildableName = "quranicaudioa.app"
+               BlueprintName = "quranicaudioa"
+               ReferencedContainer = "container:quranicaudioa.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
-            buildForTesting = "NO"
-            buildForRunning = "NO"
+            buildForTesting = "YES"
+            buildForRunning = "YES"
             buildForProfiling = "NO"
             buildForArchiving = "NO"
-            buildForAnalyzing = "NO">
+            buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "quranicaudioappTests.xctest"
-               BlueprintName = "quranicaudioappTests"
-               ReferencedContainer = "container:quranicaudioapp.xcodeproj">
+               BuildableName = "quranicaudioaTests.xctest"
+               BlueprintName = "quranicaudioaTests"
+               ReferencedContainer = "container:quranicaudioa.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -54,17 +54,26 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "00E356ED1AD99517003FC87E"
+               BuildableName = "quranicaudioaTests.xctest"
+               BlueprintName = "quranicaudioaTests"
+               ReferencedContainer = "container:quranicaudioa.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "quranicaudioapp.app"
-            BlueprintName = "quranicaudioapp"
-            ReferencedContainer = "container:quranicaudioapp.xcodeproj">
+            BuildableName = "quranicaudioa.app"
+            BlueprintName = "quranicaudioa"
+            ReferencedContainer = "container:quranicaudioa.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -74,7 +83,6 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -86,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "quranicaudioapp.app"
-            BlueprintName = "quranicaudioapp"
-            ReferencedContainer = "container:quranicaudioapp.xcodeproj">
+            BuildableName = "quranicaudioa.app"
+            BlueprintName = "quranicaudioa"
+            ReferencedContainer = "container:quranicaudioa.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -105,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "quranicaudioapp.app"
-            BlueprintName = "quranicaudioapp"
-            ReferencedContainer = "container:quranicaudioapp.xcodeproj">
+            BuildableName = "quranicaudioa.app"
+            BlueprintName = "quranicaudioa"
+            ReferencedContainer = "container:quranicaudioa.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
