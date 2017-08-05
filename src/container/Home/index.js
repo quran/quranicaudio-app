@@ -1,23 +1,20 @@
-import { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import * as Actions from '../../actions/index';
-import { baseHeaderStyle } from '../../styles/variables';
+import { Component, PropTypes } from "react";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import * as Actions from "../../actions/index";
+import { baseHeaderStyle } from "../../styles/variables";
 
 // components
-import ReciterList from '../../components/ReciterList';
-import Loader from '../../components/common/Loader';
-import Search from '../../components/common/Search';
-import { Container } from 'native-base';
-
+import ReciterList from "../../components/ReciterList";
+import Loader from "../../components/common/Loader";
+import Search from "../../components/common/Search";
+import { Container } from "native-base";
 
 export class Home extends Component {
+
   static navigationOptions = {
-    title: 'Quranic Audio',
-    header: ({ state, setParams }, defaultHeader) => ({
-      ...defaultHeader,
-      ...baseHeaderStyle
-    })
+    title: "Quranic Audio",
+    ...baseHeaderStyle
   };
 
   static propTypes = {
@@ -34,13 +31,19 @@ export class Home extends Component {
     if (reciters.length < 1) return <Loader />;
     const filtered =
       search && search.value.length > 0
-        ? reciters.filter(item => item.name.toLowerCase().match(search.value.toLowerCase()))
+        ? reciters.filter(item =>
+            item.name.toLowerCase().match(search.value.toLowerCase())
+          )
         : reciters;
 
     return (
       <Container style={{ height: 100 }}>
         <Search actions={actions} data={search} />
-        <ReciterList reciters={filtered} actions={{ ...actions, navigate }} search={search} />
+        <ReciterList
+          reciters={filtered}
+          actions={{ ...actions, navigate }}
+          search={search}
+        />
       </Container>
     );
   }
