@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-               BuildableName = "quranicaudioa-tvOS.app"
-               BlueprintName = "quranicaudioa-tvOS"
-               ReferencedContainer = "container:quranicaudioa.xcodeproj">
+               BuildableName = "quranicaudioapp-tvOS.app"
+               BlueprintName = "quranicaudioapp-tvOS"
+               ReferencedContainer = "container:quranicaudioapp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "quranicaudioa-tvOSTests.xctest"
-               BlueprintName = "quranicaudioa-tvOSTests"
-               ReferencedContainer = "container:quranicaudioa.xcodeproj">
+               BuildableName = "quranicaudioapp-tvOSTests.xctest"
+               BlueprintName = "quranicaudioapp-tvOSTests"
+               ReferencedContainer = "container:quranicaudioapp.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "2D02E48F1E0B4A5D006451C7"
-               BuildableName = "quranicaudioa-tvOSTests.xctest"
-               BlueprintName = "quranicaudioa-tvOSTests"
-               ReferencedContainer = "container:quranicaudioa.xcodeproj">
+               BuildableName = "quranicaudioapp-tvOSTests.xctest"
+               BlueprintName = "quranicaudioapp-tvOSTests"
+               ReferencedContainer = "container:quranicaudioapp.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "quranicaudioa-tvOS.app"
-            BlueprintName = "quranicaudioa-tvOS"
-            ReferencedContainer = "container:quranicaudioa.xcodeproj">
+            BuildableName = "quranicaudioapp-tvOS.app"
+            BlueprintName = "quranicaudioapp-tvOS"
+            ReferencedContainer = "container:quranicaudioapp.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "quranicaudioa-tvOS.app"
-            BlueprintName = "quranicaudioa-tvOS"
-            ReferencedContainer = "container:quranicaudioa.xcodeproj">
+            BuildableName = "quranicaudioapp-tvOS.app"
+            BlueprintName = "quranicaudioapp-tvOS"
+            ReferencedContainer = "container:quranicaudioapp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "2D02E47A1E0B4A5D006451C7"
-            BuildableName = "quranicaudioa-tvOS.app"
-            BlueprintName = "quranicaudioa-tvOS"
-            ReferencedContainer = "container:quranicaudioa.xcodeproj">
+            BuildableName = "quranicaudioapp-tvOS.app"
+            BlueprintName = "quranicaudioapp-tvOS"
+            ReferencedContainer = "container:quranicaudioapp.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
