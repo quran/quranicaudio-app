@@ -10,7 +10,7 @@ import perpareReciterSurahsList from '../utils/perpareReciterSurahsList';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const View = styled.View`
-  height: ${props => (props.minimise ? '50' : '200')}px;
+  height: ${props => (props.minimise ? '40' : '200')}px;
   width: 100%;
   background: #000;
   borderTopColor: #2ca4ab;

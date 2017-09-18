@@ -1,21 +1,17 @@
 export const brandColor = "#161616";
 export const baseHeaderStyle = {
   headerStyle: {
-    backgroundColor: brandColor,
-    height: 80,
-    shadowRadius: 5,
-    elevation: 0,
-    shadowColor: "black",
-    shadowOpacity: 0.1,
-    shadowOffset: {
-      height: 3,
-      width: 0
-    }
+    backgroundColor: "#258489",
+    elevation: 1,
+    paddingTop: 10,
+    height: 100
   },
   headerTitleStyle: {
-     color: 'white',
+    color: "white",
+    fontSize: 30
   },
   headerBackTitleStyle: {
     color: "white"
-  }
+  },
+  headerTintColor: "white"
 };

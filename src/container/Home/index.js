@@ -11,10 +11,11 @@ import Search from "../../components/common/Search";
 import { Container } from "native-base";
 
 export class Home extends Component {
-
   static navigationOptions = {
     title: "Quranic Audio",
-    ...baseHeaderStyle
+    ...baseHeaderStyle,
+    gesturesEnabled: true,
+
   };
 
   static propTypes = {

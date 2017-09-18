@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Dimensions } from 'react-native';
+import { Text, View, Dimensions, Platform } from 'react-native';
 import * as Actions from '../../actions/index';
 import { connect } from 'react-redux';
 import styled from 'styled-components/native';
@@ -209,7 +209,7 @@ class AudioPlayer extends Component {
     const minimised = this.props.minimise;
     return (
       <View style={Styles.container}>
-        {minimised &&
+        {minimised && Platform.OS === 'ios' &&
         <PlayButton
           togglePlay={this.togglePlay}
           playing={this.state.playing}
