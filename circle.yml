@@ -1,0 +1,20 @@
+---
+dependencies:
+  cache_directories:
+    - ~/.cache/yarn
+  override:
+    - yarn
+  pre:
+    - ls
+deployment:
+  production:
+    branch: master
+    commands:
+      - "echo \"doing a patch update!\""
+
+machine:
+  node:
+    version: "7.2.1"
+test:
+  override:
+    - "yarn test"

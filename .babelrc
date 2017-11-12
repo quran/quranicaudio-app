@@ -1,0 +1,9 @@
+{
+  "presets": [
+    "react-native"
+  ],
+  "plugins": [
+    "transform-decorators-legacy",
+    "react-require"
+  ]
+}
