@@ -452,7 +452,7 @@ Many thanks to [Ahmad Galal](http://ahmedgalal.com/) for the amazing UI he has c
 ![play](https://cloud.githubusercontent.com/assets/2606228/24082905/17c7a30e-0cc5-11e7-898a-836b84b9eede.png)
 ![reciters list](https://cloud.githubusercontent.com/assets/2606228/24082906/17d4be22-0cc5-11e7-990b-744af3442bf3.png)
 
-# Usefule links:
+# Useful links:
 
 https://github.com/quran/audio.quran.com
 https://github.com/quran/quran.com-frontend
