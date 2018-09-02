@@ -1,21 +1,21 @@
 import { AsyncStorage } from 'react-native';
 
-function withLeadingZero(amount) {
+const withLeadingZero = (amount) => {
   if (amount < 10) {
     return `0${amount}`;
   }
   return `${amount}`;
-}
+};
 
-export function formattedTime(timeInSeconds) {
+export const formattedTime = (timeInSeconds) => {
   const minutes = Math.floor(timeInSeconds / 60);
-  const seconds = (timeInSeconds - minutes) * 60;
+  const seconds = timeInSeconds - minutes * 60;
 
-  if (isNaN(minutes) || isNaN(seconds) || (minutes < 0 && seconds < 0)) {
+  if (isNaN(minutes) || isNaN(seconds)) {
     return '';
   }
   return (`${withLeadingZero(minutes)}:${withLeadingZero(seconds.toFixed(0))}`);
-}
+};
 
 export function findSongInCollection(id, songs) {
   return songs.filter(song => song.id === id).length;
@@ -52,4 +52,12 @@ export function secondTime(seconds) {
 export const constants = {
   defaultTime: '00:00'
 };
+// id, url, title and artist
+export const itemsToTracks = items => items.map(item => ({
+  id: `${item.id}`,
+  url: item.path,
+  title: item.title,
+  artist: item.artist || '',
+  artwork: encodeURI(item.thumb)
+}));
 

@@ -50,7 +50,7 @@ export default (props) => {
     props.chapters.map((chapter) => {
       const duration =
         props.files && props.files[chapter.id]
-          ? Utils.secondTime(props.files[chapter.id].format.duration)
+          ? Utils.secondTime(props.files[chapter.id - 1].format.duration)
           : '00:00';
       return (
         <ListItem

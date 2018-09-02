@@ -29,9 +29,9 @@ export const PlayButton = ({ minimised, playing, togglePlay, }) =>
     color={(!playing && minimised) ? '#2ca4ab' : '#fff'}
   />);
 
-export const ForwardButton = (props) => {
+export const ForwardButton = ({ chapters, chapterIndex, shuffle, goForward }) => {
   let forwardButton = null;
-  if (!props.shuffle && props.songIndex + 1 === props.songs.length) {
+  if (!shuffle && chapterIndex === chapters.length) {
     forwardButton = (
       <FontAwesome
         style={Styles.forward}
@@ -43,7 +43,7 @@ export const ForwardButton = (props) => {
   } else {
     forwardButton = (
       <FontAwesome
-        onPress={props.goForward}
+        onPress={goForward}
         style={Styles.forward}
         name="forward"
         size={25}

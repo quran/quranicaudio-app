@@ -12,7 +12,7 @@ import Search from '../../components/common/Search';
 
 import { Container } from 'native-base';
 
-export class Chapters extends Component {
+class Chapters extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: navigation.state.params.reciter.name,
     ...baseHeaderStyle

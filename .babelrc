@@ -3,7 +3,7 @@
     "react-native"
   ],
   "plugins": [
-    "transform-decorators-legacy",
+    "transform-remove-console",
     "react-require"
   ]
 }

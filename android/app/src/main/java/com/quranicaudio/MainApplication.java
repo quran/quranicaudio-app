@@ -3,6 +3,7 @@ package com.quranicaudio;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import guichaguri.trackplayer.TrackPlayer;
 import com.brentvatne.react.ReactVideoPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.tanguyantoine.react.MusicControl;
@@ -26,6 +27,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new TrackPlayer(),
             new ReactVideoPackage(),
             new VectorIconsPackage(),
             new MusicControl()

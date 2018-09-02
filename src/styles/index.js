@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
     height: 20
   },
   sliderTrack: {
-    height: 10,
+    height: 5,
     backgroundColor: '#333'
   },
   sliderThumb: {
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
     borderRadius: 15 / 2,
     shadowRadius: 2,
     shadowOpacity: 0.35,
-    top: 15
+    top: 2
   },
   songContainer: {
     width,

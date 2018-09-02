@@ -32,12 +32,13 @@ export default ({ reciters, actions }) => {
   const ListOfReciters = () =>
     formatRecitersByLetter(reciters).map(({ letter, reciters }) => {
       if (reciters.length < 1) return false;
-      return [<ListItem itemDivider style={{ backgroundColor: '#161616' }}>
+      return [<ListItem key={letter} itemDivider style={{ backgroundColor: '#161616' }}>
         <Text divider>
           {letter}
         </Text>
       </ListItem>, reciters.map(reciter =>
         (<ListItem
+          key={reciter.id}
           style={{
             marginRight: 10
           }}

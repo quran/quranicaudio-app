@@ -8,21 +8,16 @@ import zeroFill from 'zero-fill';
  * @return {Array} array of formatted chapters for a reciter
  */
 export default (reciter, chapters, chapterId) => {
-  const reciterChapters = chapters.map((item, index) => {
-    const chapter = {
-      id: chapters[index].id,
-      path: `https://download.quranicaudio.com/quran/${reciter.relative_path}${zeroFill(3, chapters[index].id)}.mp3`,
-      title: chapters[index].name.simple,
-      artist: reciter.name,
-      songDuration: '17001',
-      thumb: 'http://www.assabile.com/media/person/200x256/mishary-rashid-alafasy.png'
-    };
-    return chapter;
-  });
+  const reciterChapters = chapters.map((item, index) => ({
+    id: item.id,
+    path: `https://download.quranicaudio.com/quran/${reciter.relative_path}${zeroFill.call(this, 3, item.id)}.mp3`,
+    title: item.name.simple,
+    artist: reciter.name,
+  }));
 
   return {
     chapters: reciterChapters,
-    selected_chapter: chapterId,
+    selectedChapter: chapterId,
     reciter: reciter.name
   };
 };
