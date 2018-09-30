@@ -13,11 +13,6 @@ const Text = styled.Text`
 `;
 
 class Reciters extends React.PureComponent {
-  constructor(props) {
-    super(props);
-    this.reciters = formatRecitersByLetter(props.reciters, props.section);
-  }
-
   renderHaramainSection = (reciters) => {
     const Madinah = reciters.filter(item => item.name.indexOf('Madinah') > -1);
     const Makkah = reciters.filter(item => item.name.indexOf('Makkah') > -1);
