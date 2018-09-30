@@ -3,18 +3,17 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../../actions/index';
+import { Container } from 'native-base';
 import { baseHeaderStyle } from '../../styles/variables';
 
 // components
 import ChapterList from '../../components/ChapterList';
 import Loader from '../../components/common/Loader';
-import Search from '../../components/common/Search';
-
-import { Container } from 'native-base';
+import ProfileHeader from '../../components/common/ProfileHeader';
 
 class Chapters extends Component {
-  static navigationOptions = ({ navigation }) => ({
-    title: navigation.state.params.reciter.name,
+  static navigationOptions = () => ({
+    title: 'Surahs',
     ...baseHeaderStyle
   });
 
@@ -25,7 +24,6 @@ class Chapters extends Component {
   componentDidMount() {
     const { actions, navigation } = this.props;
 
-    const { navigate } = navigation;
     const reciter = navigation.state.params.reciter;
     actions.getChapters();
     actions.loadFilesForReciter(reciter.id);
@@ -43,10 +41,11 @@ class Chapters extends Component {
         : chapters;
 
     const reciter = navigation.state.params.reciter;
+
     if (chapters.length < 1 || files.length < 1) return <Loader />;
     return (
       <Container>
-        <Search actions={actions} data={search} />
+        <ProfileHeader name={reciter.name} arabicName={reciter.arabic_name} />
         <ChapterList
           chapters={filtered}
           files={files}

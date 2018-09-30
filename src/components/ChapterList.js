@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import * as Utils from '../utils/audio';
-import { Linking } from 'react-native';
-import { Content, ListItem } from 'native-base';
+import { Linking, FlatList } from 'react-native';
+import { ListItem } from 'native-base';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
 const Duration = styled.Text`
@@ -46,51 +46,46 @@ export default (props) => {
       </NoneFound>
     );
   }
-  const ListOfChapters = () => [
-    props.chapters.map((chapter) => {
-      const duration =
-        props.files && props.files[chapter.id]
-          ? Utils.secondTime(props.files[chapter.id - 1].format.duration)
-          : '00:00';
-      return (
-        <ListItem
-          style={{
+  const Chapter = (chapter) => {
+    const duration =
+      props.files && props.files[chapter.id]
+        ? Utils.secondTime(props.files[chapter.id - 1].format.duration)
+        : '00:00';
+    return (
+      <ListItem
+        style={{
 
-            marginRight: 10
-          }}
-          key={chapter.id}
-          onPress={() =>
-            props.actions.selectChapter({
-              reciter: props.reciter,
-              chapter: chapter.id
-            })}
-        >
-          <ItemContainer>
-            <Text>
-              {chapter.name.simple}
-            </Text>
-            <Read
-              onPress={() =>
-                Linking.openURL(`https://www.quran.com/${chapter.id}`)}
-            >
-              {' '}<Icon name="book" /> Read{' '}
-            </Read>
-            <Duration>
-              {duration}
-            </Duration>
-          </ItemContainer>
-        </ListItem>
-      );
-    })
-  ];
+          marginRight: 10
+        }}
+        key={chapter.id}
+        onPress={() =>
+          props.actions.selectChapter({
+            reciter: props.reciter,
+            chapter: chapter.id
+          })}
+      >
+        <ItemContainer>
+          <Text>
+            {chapter.name.simple}
+          </Text>
+          <Read
+            onPress={() =>
+              Linking.openURL(`https://www.quran.com/${chapter.id}`)}
+          >
+            {' '}<Icon name="book" /> Read{' '}
+          </Read>
+          <Duration>
+            {duration}
+          </Duration>
+        </ItemContainer>
+      </ListItem>
+    );
+  };
 
   return (
-    <Content
-      style={{
-        backgroundColor: 'white'
-      }}
-    >
-      {ListOfChapters()}
-    </Content>
+    <FlatList
+      data={props.chapters}
+      renderItem={({ item }) => Chapter(item)}
+    />
   );
 };

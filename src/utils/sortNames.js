@@ -1,9 +1,21 @@
-const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
-export default (reciters) => {
-  const recitersWithLetter = reciters.map(item => ({ ...item, letter: item.name.charAt(0) }));
 
-  return letters.map(letter => ({
-    letter,
-    reciters: recitersWithLetter.filter(item => item.letter === letter)
+export default (reciters = [], section) => {
+  const recitersWithLetter = reciters.map(item => ({
+    ...item,
+    letter: item.name.toUpperCase().charAt(0)
   }));
+
+  return letters.map((letter) => {
+    const recitersFiltered = recitersWithLetter
+      .filter(item => item.letter === letter)
+      .filter(item => item.section_id === Number(section));
+
+    return {
+      letter,
+      reciters: recitersFiltered,
+      hasReciters: recitersFiltered.length > 0
+    };
+  });
 };
+
+const letters = 'abcdefghijklmnopqrstuvwxyz'.toUpperCase().split('');

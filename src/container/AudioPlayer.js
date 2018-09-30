@@ -41,7 +41,7 @@ class AudioPlayerContainer extends React.Component {
     if (selection && selection.chapter) {
       return (
         <AnimatedView minimise={player.minimise}>
-          <ViewCloseIcon onPress={() => actions.minimisePlayer()}>
+          <ViewCloseIcon onPress={() => actions.minimisePlayer(!player.minimise)}>
             <Chevron
               name="chevron-down"
               color="white"
