@@ -1,12 +1,9 @@
-
-
 import React from 'react';
 import formatRecitersByLetter from '../utils/sortNames';
 import { FlatList } from 'react-native';
 import { ListItem } from 'native-base';
 import styled from 'styled-components/native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-
 
 const Text = styled.Text`
   color: ${props => (props.divider ? 'white' : 'black')};
@@ -15,8 +12,26 @@ const Text = styled.Text`
   padding: ${props => (props.divider ? '10px' : '0')};
 `;
 
-
 class Reciters extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.reciters = formatRecitersByLetter(props.reciters, props.section);
+  }
+
+  renderHaramainSection = (reciters) => {
+    const Madinah = reciters.filter(item => item.name.indexOf('Madinah') > -1);
+    const Makkah = reciters.filter(item => item.name.indexOf('Makkah') > -1);
+
+    return (
+      <React.Fragment>
+        <Text divider>Makkah</Text>
+        {this.renderListItems(Makkah)}
+        <Text divider>Madinah</Text>
+        {this.renderListItems(Madinah)}
+      </React.Fragment>
+    );
+  };
+
   renderListItems(item) {
     return item.map(reciter => (
       <ListItem
@@ -25,28 +40,35 @@ class Reciters extends React.PureComponent {
           marginRight: 10
         }}
         onPress={() => this.props.actions.navigate('Chapters', { reciter })}
-
       >
-        <Text>
-          {reciter.name}
-        </Text>
+        <Text>{reciter.name}</Text>
       </ListItem>
     ));
   }
 
+  renderReciters = ({ item }) => {
+    const { section } = this.props;
+    const isHaramainSection = section === 2;
+
+    if (item.hasReciters && isHaramainSection) {
+      return this.renderHaramainSection(item.reciters);
+    }
+
+    if (item.hasReciters) {
+      return (
+        <React.Fragment>
+          <Text divider>{item.letter}</Text>
+          {this.renderListItems(item.reciters)}
+        </React.Fragment>
+      );
+    }
+
+    return null;
+  };
+
   render() {
     const { reciters, section } = this.props;
     const list = formatRecitersByLetter(reciters, section);
-
-    const renderReciters = ({ item }) => item.hasReciters && (
-      <React.Fragment>
-        <Text divider>
-          {item.letter}
-        </Text>
-        {this.renderListItems(item.reciters)}
-      </React.Fragment>
-    );
-
 
     if (list.length < 1) {
       return (
@@ -56,17 +78,12 @@ class Reciters extends React.PureComponent {
       );
     }
 
-    return (
-      <FlatList
-        data={list}
-        renderItem={renderReciters}
-      />
-    );
+    return <FlatList data={list} renderItem={this.renderReciters} />;
   }
 }
 
 const Icon = styled(FontAwesome)`
-  color: #2CA4AB;
+  color: #2ca4ab;
 `;
 
 const NoneFound = styled.Text`
@@ -76,6 +93,5 @@ const NoneFound = styled.Text`
   align-self: center;
   margin-top: 50%;
 `;
-
 
 export default Reciters;

@@ -21,7 +21,7 @@ class Chapters extends Component {
     navigation: PropTypes.object.isRequired
   };
 
-  componentDidMount() {
+  componentWillMount() {
     const { actions, navigation } = this.props;
 
     const reciter = navigation.state.params.reciter;
@@ -32,14 +32,6 @@ class Chapters extends Component {
   render() {
     const { navigation, chapters, actions, search, files } = this.props;
     const { navigate } = navigation;
-
-    const filtered =
-      search && search.value.length > 0
-        ? chapters.filter(item =>
-          item.name.simple.toLowerCase().match(search.value.toLowerCase())
-        )
-        : chapters;
-
     const reciter = navigation.state.params.reciter;
 
     if (chapters.length < 1 || files.length < 1) return <Loader />;
@@ -47,7 +39,7 @@ class Chapters extends Component {
       <Container>
         <ProfileHeader name={reciter.name} arabicName={reciter.arabic_name} />
         <ChapterList
-          chapters={filtered}
+          chapters={chapters}
           files={files}
           reciter={reciter}
           actions={{ ...actions, navigate }}
@@ -74,4 +66,7 @@ function mapDispatchToProps(dispatch) {
   return { actions: bindActionCreators(Actions, dispatch), dispatch };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Chapters);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Chapters);

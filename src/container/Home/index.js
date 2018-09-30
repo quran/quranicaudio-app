@@ -51,6 +51,19 @@ class Home extends Component {
     this.setState({ section, filterVisible: false });
   }
 
+  get filteredReciters() {
+    const { reciters, search } = this.props;
+
+    const filtered =
+      search && search.value.length > 0
+        ? reciters.filter(item =>
+          item.name.toLowerCase().match(search.value.toLowerCase())
+        )
+        : reciters;
+
+    return filtered;
+  }
+
   toggleFilter = () => {
     this.setState({ filterVisible: !this.state.filterVisible });
   }
@@ -59,18 +72,12 @@ class Home extends Component {
     const { navigation, reciters, actions, search } = this.props;
     const { navigate } = navigation;
     if (reciters.length < 1) return <Loader />;
-    const filtered =
-      search && search.value.length > 0
-        ? reciters.filter(item =>
-          item.name.toLowerCase().match(search.value.toLowerCase())
-        )
-        : reciters;
 
     return (
       <Container style={{ height: 100 }}>
         <Search actions={actions} data={search} />
         <ReciterList
-          reciters={filtered}
+          reciters={this.filteredReciters}
           actions={{ ...actions, navigate }}
           search={search}
           section={this.state.section}
