@@ -87,6 +87,7 @@ def versionPatch = npmVersion[2]
  */
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/react-native-sentry/sentry.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -161,6 +162,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-sentry')
     compile project(':react-native-track-player')
     compile project(':react-native-music-control')
     compile fileTree(dir: "libs", include: ["*.jar"])

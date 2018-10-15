@@ -1,4 +1,5 @@
 import { FETCH_CHAPTERS, SELECT_CHAPTER_TO_PLAY } from './constants';
+import { Sentry } from 'react-native-sentry';
 
 export const chapters = data => ({
   type: FETCH_CHAPTERS,
@@ -17,6 +18,7 @@ export const getChapters = () => {
     .then(response => response.json())
     .then(data => dispatch(chapters(data)))
     .catch((error) => {
+      Sentry.captureException(error);
       console.warn(error);
       dispatch(chapters([]));
     });

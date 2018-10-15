@@ -1,4 +1,5 @@
 import { GET_FILES_FAIL, GET_FILES } from './constants';
+import { Sentry } from 'react-native-sentry';
 
 export const files = data => ({
   type: GET_FILES,
@@ -12,6 +13,7 @@ export const loadFilesForReciter = (id) => {
     .then(response => response.json())
     .then(data => dispatch(files(data)))
     .catch((error) => {
+      Sentry.captureException(error);
       console.warn(error);
       dispatch(files([]));
     });

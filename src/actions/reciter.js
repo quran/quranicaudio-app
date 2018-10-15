@@ -1,4 +1,5 @@
 import { FETCH_RECITERS } from './constants';
+import { Sentry } from 'react-native-sentry';
 
 export const reciters = data => ({
   type: FETCH_RECITERS,
@@ -12,6 +13,7 @@ export const getReciters = () => {
     .then(response => response.json())
     .then(data => dispatch(reciters(data)))
     .catch((error) => {
+      Sentry.captureException(error);
       console.warn(error);
       dispatch(reciters([]));
     });

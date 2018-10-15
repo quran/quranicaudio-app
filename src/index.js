@@ -7,6 +7,9 @@ import reducers from './reducers';
 import { createReactNavigationReduxMiddleware, reduxifyNavigator } from 'react-navigation-redux-helpers';
 import AudioPlayer from './container/AudioPlayer.js';
 import TrackPlayer from 'react-native-track-player';
+import { Sentry } from 'react-native-sentry';
+
+Sentry.config('https://971e30ae411b4b9487c00e5e290d3df3@sentry.io/1296064').install();
 
 const navigationMiddleware = createReactNavigationReduxMiddleware(
   'root',

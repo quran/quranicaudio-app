@@ -465,3 +465,11 @@ Eject themes:
 ```bash
   node node_modules/native-base/ejectTheme.js
 ```
+
+#Sentry:
+
+For Sentry to work you need to have the sentry.properties file locally in both the android and ios directories, to get these files generated make sure you are logged in on sentry in your default browser with an account that have access to Sentry account for Quranicaudio and then run these commands:
+```bash
+$ react-native unlink react-native-sentry
+$ react-native link react-native-sentry
+```

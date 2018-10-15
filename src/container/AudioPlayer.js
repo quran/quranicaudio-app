@@ -1,5 +1,5 @@
 import React from 'react';
-import { Animated } from 'react-native';
+import { Animated, SafeAreaView } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as Actions from '../actions/index';
@@ -40,24 +40,27 @@ class AudioPlayerContainer extends React.Component {
     const selection = chapters.selection;
     if (selection && selection.chapter) {
       return (
-        <AnimatedView minimise={player.minimise}>
-          <ViewCloseIcon onPress={() => actions.minimisePlayer(!player.minimise)}>
-            <Chevron
-              name="chevron-down"
-              color="white"
-              directionUp={player.minimise}
+        <>
+          <AnimatedView minimise={player.minimise}>
+            <ViewCloseIcon onPress={() => actions.minimisePlayer(!player.minimise)}>
+              <Chevron
+                name="chevron-down"
+                color="white"
+                directionUp={player.minimise}
+              />
+            </ViewCloseIcon>
+            <AudioPlayer
+              minimise={player.minimise}
+              key={selection.chapter}
+              chapters={perpareReciterSurahsList(
+                selection.reciter,
+                chapters.chapters,
+                selection.chapter
+              )}
             />
-          </ViewCloseIcon>
-          <AudioPlayer
-            minimise={player.minimise}
-            key={selection.chapter}
-            chapters={perpareReciterSurahsList(
-              selection.reciter,
-              chapters.chapters,
-              selection.chapter
-            )}
-          />
-        </AnimatedView>
+          </AnimatedView>
+          <SafeAreaView style={{ backgroundColor: '#000' }} />
+        </>
       );
     }
     return false;

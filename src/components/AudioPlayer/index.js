@@ -16,6 +16,7 @@ import {
 } from '../../components/PlayerButtons';
 import * as Progress from "react-native-progress"; //eslint-disable-line
 import PlayerProgressBar from './PlayerProgressBar';
+import { Sentry } from 'react-native-sentry';
 
 class AudioPlayer extends Component {
   state = {
@@ -36,6 +37,7 @@ class AudioPlayer extends Component {
       const currentItem = chapters[selectedChapter - 1];
       this.initPlayer({ items: chapters, currentItem });
     } catch (error) {
+      Sentry.captureException(error);
       console.log(error);
     }
 
@@ -90,6 +92,7 @@ class AudioPlayer extends Component {
       TrackPlayer.play();
       this.props.actions.updateIsPlaying(true);
     } catch (error) {
+      Sentry.captureException(error);
       console.log(error);
     }
     return true;
