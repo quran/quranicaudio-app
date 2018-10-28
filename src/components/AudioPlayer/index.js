@@ -25,13 +25,33 @@ class AudioPlayer extends Component {
     appState: AppState.currentState,
   };
 
+
   async componentDidMount() {
+    this.loadPlayer(this.props, false);
+
+    // to handle background/foreground switching
+    AppState.addEventListener('change', this.handleAppStateChange);
+  }
+
+
+  async componentWillReceiveProps(nextProps) {
+    if (this.props.selection.reciter.name !== nextProps.selection.reciter.name) {
+      this.loadPlayer(nextProps, true);
+    }
+  }
+
+  loadPlayer = async (props, reset) => {
     try {
-      const { chapters: { chapters, selectedChapter } } = this.props;
+      const { chapters: { chapters, selectedChapter } } = props;
       this.props.actions.setItemsList(chapters);
       this.props.actions.setSelectedItemIndex(selectedChapter);
       // configure the Track player
-      await this.initTrackPlayer();
+
+      if (reset) {
+        TrackPlayer.reset();
+      } else {
+        await this.initTrackPlayer();
+      }
 
       // initialize the player
       const currentItem = chapters[selectedChapter - 1];
@@ -40,10 +60,8 @@ class AudioPlayer extends Component {
       Sentry.captureException(error);
       console.log(error);
     }
-
-    // to handle background/foreground switching
-    AppState.addEventListener('change', this.handleAppStateChange);
   }
+
 
   handleAppStateChange = (nextAppState) => {
     const isForeground = this.state.appState.match(/inactive|background/) && nextAppState === 'active';
@@ -149,11 +167,11 @@ class AudioPlayer extends Component {
     return (
       <View style={Styles.container}>
         {minimised && Platform.OS === 'ios' &&
-        <PlayButton
-          togglePlay={this.togglePlay}
-          playing={playing}
-          minimised={minimised}
-        />}
+          <PlayButton
+            togglePlay={this.togglePlay}
+            playing={playing}
+            minimised={minimised}
+          />}
         <Text style={Styles.songTitle}>
           {title}
         </Text>
